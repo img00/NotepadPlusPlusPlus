@@ -1,0 +1,54 @@
+﻿<Window x:Name="Window"
+        x:Class="NotepadPlusPlusPlus.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NotepadPlusPlusPlus"
+        mc:Ignorable="d"
+        Icon="/Resources/MainIcon.ico"
+        Title="*Sin título: Bloc de notas" Height="450" Width="800">
+
+    <Grid>
+		<DockPanel Margin="1">
+			<Menu x:Name="menu" DockPanel.Dock="Top" Background="White">
+				<Menu.Items>
+					<MenuItem Header="_Archivo">
+                        <MenuItem Header="Nuevo" InputGestureText="Ctrl+N" Command="{Binding CmdNew}"/>
+                        <MenuItem Header="Abrir" Command="{Binding CmdOpen}"/>
+                        <MenuItem Header="Guardar" InputGestureText="Ctrl+G" Command="{Binding CmdSave}"/>
+                        <MenuItem Header="Guardar como" InputGestureText="Ctrl+Shift+G" Command="{Binding CmdSaveAs}"/>
+						<Separator/>
+                        <MenuItem Header="Salir" Command="{Binding CmdClose}" CommandParameter="{Binding ElementName=Window}"/>
+                    </MenuItem>
+					<MenuItem Header="_Edición"/>
+					<MenuItem Header="F_ormato"/>
+					<MenuItem Header="_Ver"/>
+					<MenuItem Header="_Ayuda"/>
+				</Menu.Items>
+
+			</Menu>
+
+			<DockPanel>
+				<TextBlock x:Name="textBlock"
+						DockPanel.Dock="Bottom"
+                        Height="20"
+                        Text=""/>
+
+                <TextBlock />
+
+                <Border BorderBrush="#EAEAEA" BorderThickness="1">
+                    <TextBox
+                        DockPanel.Dock="Top"
+                        VerticalScrollBarVisibility="Visible"
+                        AcceptsReturn="True"
+                        AcceptsTab="True"
+                        BorderThickness="0"
+                        Text=""/>
+                </Border>
+
+			</DockPanel>
+		</DockPanel>
+
+	</Grid>
+</Window>
