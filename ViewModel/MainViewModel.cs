@@ -1,35 +1,67 @@
-﻿using NotepadPlusPlusPlus.ViewModel.Commands;
-using System.Windows.Input;
+﻿using NotepadPlusPlusPlus.ViewModel.Commands.Edit;
+using NotepadPlusPlusPlus.ViewModel.Commands.File;
+using System.Runtime.CompilerServices;
 
 namespace NotepadPlusPlusPlus.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        public ICommand CmdNew { get; } = new CommandNew();
-        public ICommand CmdOpen { get; } = new CommandOpen();
-        public ICommand CmdSave { get; } = new CommandSave();
-        public ICommand CmdSaveAs { get; } = new CommandSaveAs();
-        public ICommand CmdClose { get; }
+        public FileCommands FileCommands { get; set; }
+        public EditCommands EditCommands { get; set; }
 
         public MainViewModel()
         {
-            CmdClose = new CommandClose(this);
+            File = new Model.File();
+
+            FileCommands = new FileCommands(this);
+            EditCommands = new EditCommands(this);
         }
 
-        private string _texto;
-        public string Texto
+        private string? _textBoxText;
+        public string TextBoxText
         {
-            get
-            {
-                return _texto;
-            }
+            get => _textBoxText ?? "";
             set
             {
-                _texto = value;
-                OnPropertyChanged(nameof(Texto));
+                _textBoxText = value;
+                OnPropertyChanged(nameof(TextBoxText));
+
+                if (value == null) return;
+
+                File.Unsaved = !value.Equals(File.Text);
+
+                if (File.Unsaved)
+                {
+                    if (!WindowTitle.StartsWith('*'))
+                        WindowTitle = '*' + WindowTitle;
+                }
+                else
+                    WindowTitle = WindowTitle.StartsWith('*') ? WindowTitle[1..] : WindowTitle;
+            }
+        }
+
+        private Model.File? _file;
+        public Model.File File
+        {
+            get => _file ?? new Model.File();
+            set
+            {
+                _file = value;
+                OnPropertyChanged(nameof(File));
+                WindowTitle = $"{File.Name}: Bloc de notas";
+            }
+        }
+
+        private string? _windowTitle;
+        public string WindowTitle
+        {
+            get => _windowTitle ?? "";
+            set
+            {
+                _windowTitle = value;
+                OnPropertyChanged(nameof(WindowTitle));
             }
         }
 
     }
-
 }

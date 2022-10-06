@@ -4,86 +4,93 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:NotepadPlusPlusPlus"
+        xmlns:viewmodels="clr-namespace:NotepadPlusPlusPlus.ViewModel"
         mc:Ignorable="d"
-        Icon="/Resources/MainIcon.ico"
-        Title="*Sin título: Bloc de notas" Height="450" Width="800">
+        Icon="\Resources/MainIcon.ico"
+        Title="{Binding WindowTitle}" Height="450" Width="800">
+
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding FileCommands.CmdNew}" Modifiers="Ctrl" Key="N"/>
+        <KeyBinding Command="{Binding FileCommands.CmdSave}" Modifiers="Ctrl" Key="G"/>
+        <KeyBinding Command="{Binding FileCommands.CmdSaveAs}" Modifiers="Ctrl+Shift" Key="S"/>
+        <KeyBinding Command="{Binding EditCommands.CmdDate}" CommandParameter="{Binding ElementName=MainTextBox}" Key="F5"/>
+        <KeyBinding Command="{Binding EditCommands.CmdSearchBing}" Modifiers="Ctrl" Key="F"/>
+    </Window.InputBindings>
 
     <Grid>
-		<DockPanel Margin="1">
-			<Menu x:Name="menu" DockPanel.Dock="Top" Background="White">
+		<DockPanel Margin="1" FocusManager.FocusedElement="{Binding ElementName=MainTextBox}">
+			<Menu x:Name="MainMenu" DockPanel.Dock="Top" Background="White">
 				<Menu.Items>
 					<MenuItem Header="_Archivo">
-                        <MenuItem Header="Nuevo" InputGestureText="Ctrl+N" Command="{Binding CmdNew}"/>
-                        <MenuItem Header="Abrir..." Command="{Binding CmdOpen}"/>
-                        <MenuItem Header="Guardar" InputGestureText="Ctrl+G" Command="{Binding CmdSave}"/>
-                        <MenuItem Header="Guardar como..." InputGestureText="Ctrl+Shift+S" Command="{Binding CmdSaveAs}"/>
+                        <MenuItem Header="Nuevo" InputGestureText="Ctrl+N" Command="{Binding FileCommands.CmdNew}"/>
+                        <MenuItem Header="Abrir..." Command="{Binding FileCommands.CmdOpen}" Background="Beige"/>
+                        <MenuItem Header="Guardar" InputGestureText="Ctrl+G" Command="{Binding FileCommands.CmdSave}"/>
+                        <MenuItem Header="Guardar como..." InputGestureText="Ctrl+Mayús+S" Command="{Binding FileCommands.CmdSaveAs}"/>
 						<Separator/>
-                        <MenuItem Header="Configurar página..." Command=""/>
-                        <MenuItem Header="Imprimir..." InputGestureText="Ctrl+P" Command=""/>
+                        <MenuItem Header="Configurar página..." Command="" Background="Beige"/>
+                        <MenuItem Header="Imprimir..." InputGestureText="Ctrl+P" Command="ApplicationCommands.PrintPreview" Background="Beige"/>
                         <Separator/>
-                        <MenuItem Header="Salir" Command="{Binding CmdClose}" CommandParameter="{Binding ElementName=Window}"/>
+                        <MenuItem Header="Salir" Command="{Binding FileCommands.CmdClose}" Background="Beige"/>
                     </MenuItem>
                     <MenuItem Header="_Edición">
-                        <MenuItem Header="Deshacer" InputGestureText="Ctrl+Z" Command=""/>
+                        <MenuItem Header="Deshacer" InputGestureText="Ctrl+Z" Command="ApplicationCommands.Undo"/>
                         <Separator/>
-                        <MenuItem Header="Cortar" InputGestureText="Ctrl+X" Command=""/>
-                        <MenuItem Header="Copiar" InputGestureText="Ctrl+C" Command=""/>
-                        <MenuItem Header="Pegar" InputGestureText="Ctrl+V" Command=""/>
-                        <MenuItem Header="Eliminar" InputGestureText="Delete" Command=""/>
+                        <MenuItem Header="Cortar" InputGestureText="Ctrl+X" Command="ApplicationCommands.Cut"/>
+                        <MenuItem Header="Copiar" InputGestureText="Ctrl+C" Command="ApplicationCommands.Copy"/>
+                        <MenuItem Header="Pegar" InputGestureText="Ctrl+V" Command="ApplicationCommands.Paste"/>
+                        <MenuItem Header="Eliminar" InputGestureText="Delete" Command="EditingCommands.Delete" />
                         <Separator/>
-                        <MenuItem Header="Búsqueda con Bing..." InputGestureText="Ctrl+F" Command=""/>
-                        <MenuItem Header="Buscar..." InputGestureText="Ctrl+B" Command=""/>
-                        <MenuItem Header="Buscar siguiente" InputGestureText="F3" Command=""/>
-                        <MenuItem Header="Buscar anterior" InputGestureText="Shift+F3" Command=""/>
-                        <MenuItem Header="Reemplazar..." InputGestureText="Ctrl+R" Command=""/>
-                        <MenuItem Header="Ir a..." InputGestureText="Ctrl+T" Command=""/>
+                        <MenuItem Header="Búsqueda con Bing..." InputGestureText="Ctrl+F" Command="{Binding EditCommands.CmdSearchBing}"/>
+                        <MenuItem Header="Buscar..." InputGestureText="Ctrl+B" Command="" Background="Beige"/>
+                        <MenuItem Header="Buscar siguiente" InputGestureText="F3" Command="" Background="Beige"/>
+                        <MenuItem Header="Buscar anterior" InputGestureText="Mayús+F3" Command="" Background="Beige"/>
+                        <MenuItem Header="Reemplazar..." InputGestureText="Ctrl+R" Command="" Background="Beige"/>
+                        <MenuItem Header="Ir a..." InputGestureText="Ctrl+T" Command="" Background="Beige"/>
                         <Separator/>
-                        <MenuItem Header="Seleccionar todo" InputGestureText="Ctrl+E" Command=""/>
-                        <MenuItem Header="Hora y fecha" InputGestureText="F5" Command=""/>
+                        <MenuItem Header="Seleccionar todo" InputGestureText="Ctrl+E" Command="ApplicationCommands.SelectAll"/>
+                        <MenuItem Header="Hora y fecha" InputGestureText="F5" Command="{Binding EditCommands.CmdDate}" CommandParameter="{Binding ElementName=MainTextBox}"/>
                     </MenuItem>
                     <MenuItem Header="F_ormato">
-                        <MenuItem Header="Ajuste de línea" Command=""/>
-                        <MenuItem Header="Fuente..." Command=""/>
+                        <MenuItem Header="Ajuste de línea" Command="" Background="Beige"/>
+                        <MenuItem Header="Fuente..." Command="" Background="Beige"/>
                     </MenuItem>
                     <MenuItem Header="_Ver">
                         <MenuItem Header="Zoom" Command="">
-                            <MenuItem Header="Acercar" InputGestureText="Ctrl+signo menos" Command=""/>
-                            <MenuItem Header="Alejar" InputGestureText="Ctrl+signo más" Command=""/>
-                            <MenuItem Header="Restaurar zoom predeterminado" InputGestureText="Ctrl+0" Command=""/>
+                            <MenuItem Header="Acercar" InputGestureText="Ctrl+signo menos" Command="" Background="Beige"/>
+                            <MenuItem Header="Alejar" InputGestureText="Ctrl+signo más" Command="" Background="Beige"/>
+                            <MenuItem Header="Restaurar zoom predeterminado" InputGestureText="Ctrl+0" Command="" Background="Beige"/>
                         </MenuItem>
-                        <MenuItem Header="Barra de estado" IsCheckable="True" IsChecked="True" Command=""/>
+                        <MenuItem Header="Barra de estado" IsCheckable="True" IsChecked="True" Command="" Background="Beige"/>
                     </MenuItem>
                     <MenuItem Header="_Ayuda">
-                        <MenuItem Header="Ver la ayuda" Command=""/>
-                        <MenuItem Header="Enviar comentarios" Command=""/>
+                        <MenuItem Header="Ver la ayuda" Command="" Background="Beige"/>
+                        <MenuItem Header="Enviar comentarios" Command="" Background="Beige"/>
                         <Separator/>
-                        <MenuItem Header="Acerca del Bloc de notas" Command=""/>
+                        <MenuItem Header="Acerca del Bloc de notas" Command="" Background="Beige"/>
                     </MenuItem>
                 </Menu.Items>
 
 			</Menu>
 
 			<DockPanel>
-				<TextBlock x:Name="textBlock"
+                <TextBlock x:Name="BottomTextBlock"
 						DockPanel.Dock="Bottom"
                         Height="20"
                         Text=""/>
 
-                <TextBlock />
-
                 <Border BorderBrush="#EAEAEA" BorderThickness="1">
                     <TextBox
+                        x:Name="MainTextBox"
                         DockPanel.Dock="Top"
                         VerticalScrollBarVisibility="Visible"
                         HorizontalScrollBarVisibility="Visible"
                         AcceptsReturn="True"
                         AcceptsTab="True"
                         BorderThickness="0"
-                        Text="{Binding Texto}"/>
-                </Border>
+                        Text="{Binding TextBoxText, UpdateSourceTrigger=PropertyChanged}"/>
 
-			</DockPanel>
+                </Border>
+            </DockPanel>
 		</DockPanel>
 
 	</Grid>

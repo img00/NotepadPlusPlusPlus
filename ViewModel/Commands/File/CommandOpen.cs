@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands
+namespace NotepadPlusPlusPlus.ViewModel.Commands.File
 {
-    public class CommandNew : CommandBase
+    public class CommandOpen : CommandBase
     {
         public override void Execute(object? parameter)
         {
-            //TODO: New file logic
+            //TODO: Open file logic
             throw new NotImplementedException();
         }
     }
