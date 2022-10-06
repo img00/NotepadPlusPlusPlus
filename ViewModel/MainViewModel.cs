@@ -9,9 +9,26 @@ namespace NotepadPlusPlusPlus.ViewModel
         public ICommand CmdOpen { get; } = new CommandOpen();
         public ICommand CmdSave { get; } = new CommandSave();
         public ICommand CmdSaveAs { get; } = new CommandSaveAs();
-        public ICommand CmdClose { get; } = new CommandClose();
+        public ICommand CmdClose { get; }
 
-        public ICommand CmdZoom { get; } = new CommandZoom();
+        public MainViewModel()
+        {
+            CmdClose = new CommandClose(this);
+        }
+
+        private string _texto;
+        public string Texto
+        {
+            get
+            {
+                return _texto;
+            }
+            set
+            {
+                _texto = value;
+                OnPropertyChanged(nameof(Texto));
+            }
+        }
 
     }
 
