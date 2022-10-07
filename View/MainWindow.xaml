@@ -4,26 +4,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewmodels="clr-namespace:NotepadPlusPlusPlus.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Icon="\Resources/MainIcon.ico"
         Title="{Binding WindowTitle}" Height="450" Width="800">
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding FileCommands.CmdSaveAs}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Window.InputBindings>
         <KeyBinding Command="{Binding FileCommands.CmdNew}" Modifiers="Ctrl" Key="N"/>
+        <KeyBinding Command="{Binding FileCommands.CmdOpen}" Modifiers="Ctrl" Key="A"/>
         <KeyBinding Command="{Binding FileCommands.CmdSave}" Modifiers="Ctrl" Key="G"/>
         <KeyBinding Command="{Binding FileCommands.CmdSaveAs}" Modifiers="Ctrl+Shift" Key="S"/>
         <KeyBinding Command="{Binding EditCommands.CmdDate}" CommandParameter="{Binding ElementName=MainTextBox}" Key="F5"/>
         <KeyBinding Command="{Binding EditCommands.CmdSearchBing}" Modifiers="Ctrl" Key="F"/>
+
+        <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
     </Window.InputBindings>
 
     <Grid>
 		<DockPanel Margin="1" FocusManager.FocusedElement="{Binding ElementName=MainTextBox}">
 			<Menu x:Name="MainMenu" DockPanel.Dock="Top" Background="White">
 				<Menu.Items>
-					<MenuItem Header="_Archivo">
+                    <MenuItem Header="_Archivo">
                         <MenuItem Header="Nuevo" InputGestureText="Ctrl+N" Command="{Binding FileCommands.CmdNew}"/>
-                        <MenuItem Header="Abrir..." Command="{Binding FileCommands.CmdOpen}" Background="Beige"/>
+                        <MenuItem Header="Abrir..."  InputGestureText="Ctrl+A" Command="{Binding FileCommands.CmdOpen}" Background="Beige"/>
                         <MenuItem Header="Guardar" InputGestureText="Ctrl+G" Command="{Binding FileCommands.CmdSave}"/>
                         <MenuItem Header="Guardar como..." InputGestureText="Ctrl+Mayús+S" Command="{Binding FileCommands.CmdSaveAs}"/>
 						<Separator/>

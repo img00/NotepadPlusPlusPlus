@@ -1,5 +1,6 @@
 ﻿using NotepadPlusPlusPlus.ViewModel.Commands.Edit;
 using NotepadPlusPlusPlus.ViewModel.Commands.File;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace NotepadPlusPlusPlus.ViewModel
