@@ -9,11 +9,12 @@
         Icon="\Resources/MainIcon.ico"
         Title="{Binding WindowTitle}" Height="450" Width="800">
 
+        <!--
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding FileCommands.CmdSaveAs}"/>
         </i:EventTrigger>
-    </i:Interaction.Triggers>
+    </i:Interaction.Triggers>-->
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding FileCommands.CmdNew}" Modifiers="Ctrl" Key="N"/>
@@ -103,4 +104,5 @@
 		</DockPanel>
 
 	</Grid>
+
 </Window>

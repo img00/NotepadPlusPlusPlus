@@ -7,6 +7,8 @@ using System.Windows.Media.Imaging;
  * dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true --output "./bin/publish"
  */
 
+// TODO: Implement custom right click
+
 namespace NotepadPlusPlusPlus
 {
     public partial class MainWindow : Window
