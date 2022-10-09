@@ -9,7 +9,7 @@ using NotepadPlusPlusPlus.ViewModel.Commands.FileMenu;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands.File
 {
-    public class FileMenuCommands : ObservableObject
+    public class FileMenuCommands
     {
         private readonly MainViewModel _mainViewModel;
 

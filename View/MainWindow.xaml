@@ -58,7 +58,7 @@
                         <MenuItem Header="Hora y fecha" InputGestureText="F5" Command="{Binding EditCommands.CmdDate}"  CommandParameter="{Binding ElementName=MainTextBox}"/>
                     </MenuItem>
                     <MenuItem Header="F_ormato">
-                        <MenuItem Header="Ajuste de línea" Command="" Background="Beige"/>
+                        <MenuItem Header="Ajuste de línea" IsCheckable="True" Command="{Binding FormatCommands.CmdWrap}"/>
                         <MenuItem Header="Fuente..." Command="" Background="Beige"/>
                     </MenuItem>
                     <MenuItem Header="_Ver">
@@ -67,7 +67,7 @@
                             <MenuItem Header="Alejar" InputGestureText="Ctrl+signo más" Command="" Background="Beige"/>
                             <MenuItem Header="Restaurar zoom predeterminado" InputGestureText="Ctrl+0" Command="" Background="Beige"/>
                         </MenuItem>
-                        <MenuItem Header="Barra de estado" IsCheckable="True" IsChecked="True" Command="" Background="Beige"/>
+                        <MenuItem Header="Barra de estado" IsCheckable="True" IsChecked="True" Command="{Binding ViewCommands.CmdStatusBar}"/>
                     </MenuItem>
                     <MenuItem Header="_Ayuda">
                         <MenuItem Header="Ver la ayuda" Command="" Background="Beige"/>
@@ -78,13 +78,15 @@
                 </Menu.Items>
             </Menu>
 
-            <DockPanel Background="#f0f0f0">
-                <Border BorderThickness="0,1,0,0" BorderBrush="#e1e1e1" DockPanel.Dock="Bottom">
+            <DockPanel x:Name="DockPanel" Background="#f0f0f0">
+
+                <Border x:Name="StatusBar" BorderThickness="0,1,0,0" BorderBrush="#e1e1e1" DockPanel.Dock="Bottom" Visibility="{Binding MainWindow.StatusBar}">
                     <StackPanel x:Name="BottomPanel"
                                 DockPanel.Dock="Bottom"
                                 Height="22"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
+                        <Slider x:Name="Scale" DockPanel.Dock="Bottom" Minimum="0.1" Maximum="5" Value="{Binding MainWindow.ZoomLevel, UpdateSourceTrigger=PropertyChanged}" TickFrequency="0.1" IsSnapToTickEnabled="True" Width="150"/>
 
                         <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="140" Height="22" Padding="7,0,0,0">
                             <TextBlock x:Name="LineColBottomPanel"
@@ -97,7 +99,7 @@
                             <TextBlock x:Name="ZoomBottomPanel"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
-                                       Text="100%"/>
+                                       Text="{Binding MainWindow.ZoomLevelFormatted}"/>
                         </Border>
 
                         <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="120" Height="22" Padding="7,0,0,0">
@@ -125,14 +127,15 @@
 
                 <Border BorderBrush="#f1f1f1" BorderThickness="0, 2, 0, 1">
                     <TextBox x:Name="MainTextBox"
+                             ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                             ScrollViewer.VerticalScrollBarVisibility="Visible"
                              DockPanel.Dock="Top"
-                             VerticalScrollBarVisibility="Visible"
-                             HorizontalScrollBarVisibility="Visible"
                              AcceptsReturn="True"
                              AcceptsTab="True"
                              BorderThickness="0"
                              Text="{Binding MainWindow.Text, UpdateSourceTrigger=PropertyChanged}"
-                             FontSize="14"
+                             FontSize="{Binding MainWindow.FontSizeWithZoom}"
+                             TextWrapping="{Binding MainWindow.TextWrap}"
                              FontFamily="Consolas">
 
                         <TextBox.InputBindings>
@@ -147,7 +150,6 @@
                         </i:Interaction.Triggers>
 
                     </TextBox>
-
                 </Border>
             </DockPanel>
         </DockPanel>

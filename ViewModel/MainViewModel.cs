@@ -1,6 +1,8 @@
 ﻿using NotepadPlusPlusPlus.Model;
 using NotepadPlusPlusPlus.ViewModel.Commands.Edit;
 using NotepadPlusPlusPlus.ViewModel.Commands.File;
+using NotepadPlusPlusPlus.ViewModel.Commands.Format;
+using NotepadPlusPlusPlus.ViewModel.Commands.ViewMenu;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -14,6 +16,8 @@ namespace NotepadPlusPlusPlus.ViewModel
     {
         public FileMenuCommands FileCommands { get; }
         public EditMenuCommands EditCommands { get; }
+        public FormatMenuCommands FormatCommands { get; }
+        public ViewMenuCommands ViewCommands { get; }
 
         public MainViewModel()
         {
@@ -22,6 +26,8 @@ namespace NotepadPlusPlusPlus.ViewModel
 
             FileCommands = new FileMenuCommands(this);
             EditCommands = new EditMenuCommands(this);
+            FormatCommands = new FormatMenuCommands(this);
+            ViewCommands = new ViewMenuCommands(this);
 
             TextBoxChangedCommand = new TextBoxChangedCommand(this);
         }

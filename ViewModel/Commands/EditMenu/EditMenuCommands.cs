@@ -8,7 +8,7 @@ using NotepadPlusPlusPlus.Model;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands.Edit
 {
-    public class EditMenuCommands : ObservableObject
+    public class EditMenuCommands
     {
         private readonly MainViewModel _mainViewModel;
 

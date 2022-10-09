@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace NotepadPlusPlusPlus.Model
 {
     public class MainWindowModel : ObservableObject
     {
+
+        public MainWindowModel()
+        {
+            FontSize = 14;
+            ZoomLevel = 1;
+            TextWrap = TextWrapping.NoWrap;
+            StatusBar = Visibility.Visible;
+        }
 
         private string? _title;
         public string Title
@@ -28,6 +37,75 @@ namespace NotepadPlusPlusPlus.Model
             {
                 _text = value;
                 OnPropertyChanged(nameof(Text));
+            }
+        }
+
+        private int _fontSize;
+        public int FontSize
+        {
+            get => _fontSize;
+            set
+            {
+                _fontSize = value;
+                FontSizeWithZoom = value * ZoomLevel;
+                OnPropertyChanged(nameof(FontSize));
+            }
+        }
+
+        private float _zoomLevel;
+        public float ZoomLevel
+        {
+            get => _zoomLevel;
+            set
+            {
+                _zoomLevel = value;
+                ZoomLevelFormatted = ((int) (Math.Ceiling(value * 10)) * 10) + "%";
+                FontSizeWithZoom = value * FontSize;
+                OnPropertyChanged(nameof(ZoomLevel));
+            }
+        }
+
+        private string _zoomLevelFormatted;
+        public string ZoomLevelFormatted
+        {
+            get => _zoomLevelFormatted;
+            set
+            {
+                _zoomLevelFormatted = value;
+                OnPropertyChanged(nameof(ZoomLevelFormatted));
+            }
+        }
+
+        private float _fontSizeWithZoom;
+        public float FontSizeWithZoom
+        {
+            get => _fontSizeWithZoom;
+            set
+            {
+                _fontSizeWithZoom = value;
+                OnPropertyChanged(nameof(FontSizeWithZoom));
+            }
+        }
+
+        private TextWrapping _textWrap;
+        public TextWrapping TextWrap
+        {
+            get => _textWrap;
+            set
+            {
+                _textWrap = value;
+                OnPropertyChanged(nameof(TextWrap));
+            }
+        }
+
+        private Visibility _statusBar;
+        public Visibility StatusBar
+        {
+            get => _statusBar;
+            set
+            {
+                _statusBar = value;
+                OnPropertyChanged(nameof(StatusBar));
             }
         }
 
