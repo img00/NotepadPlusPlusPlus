@@ -53,7 +53,6 @@
                 <Setter Property="Background" TargetName="GlyphPanel" Value="{StaticResource MenuItem.Highlight.Background}"/>
                 <Setter Property="BorderBrush" TargetName="GlyphPanel" Value="{StaticResource MenuItem.Highlight.Border}"/>
             </Trigger>
-            <!-- BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB -->
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource MenuItem.Highlight.Background}"/>
                 <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource MenuItem.Highlight.Border}"/>
@@ -76,7 +75,6 @@
                     <Border x:Name="SubMenuBorder" BorderBrush="{StaticResource Menu.Static.Border}" BorderThickness="1" Background="{StaticResource Menu.Static.Background}" Padding="2">
                         <ScrollViewer x:Name="SubMenuScrollViewer" Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                             <Grid RenderOptions.ClearTypeHint="Enabled">
-                                <!-- AAAAAAAAAAAAAAAAAAAAAAAAAAA -->
                                 <Rectangle Visibility="Hidden" Fill="{StaticResource Menu.Static.Separator}" HorizontalAlignment="Left" Margin="29,2,0,2" Width="1"/>
                                 <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Cycle" Grid.IsSharedSizeScope="true" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" KeyboardNavigation.TabNavigation="Cycle"/>
                             </Grid>
@@ -131,7 +129,7 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="Red"/>
+                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource MenuItem.Highlight.Background}"/>
                 <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource MenuItemTop.Highlight.Border}"/>
             </Trigger>
         </ControlTemplate.Triggers>

@@ -7,14 +7,11 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Icon="\Resources/MainIcon.ico"
-        Title="{Binding WindowTitle}" Height="450" Width="800">
-
-        <!--
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Closing">
-            <i:InvokeCommandAction Command="{Binding FileCommands.CmdSaveAs}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>-->
+        Loaded="Window_Loaded"
+        Title="{Binding MainWindow.Title}"
+        Height="450" Width="800"
+        MinWidth="265"
+        ResizeMode="CanResizeWithGrip">
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding FileCommands.CmdNew}" Modifiers="Ctrl" Key="N"/>
@@ -28,19 +25,19 @@
     </Window.InputBindings>
 
     <Grid>
-		<DockPanel Margin="1" FocusManager.FocusedElement="{Binding ElementName=MainTextBox}">
-			<Menu x:Name="MainMenu" DockPanel.Dock="Top" Background="White">
-				<Menu.Items>
+        <DockPanel Margin="1" FocusManager.FocusedElement="{Binding ElementName=MainTextBox}">
+            <Menu x:Name="MainMenu" DockPanel.Dock="Top" Background="White">
+                <Menu.Items>
                     <MenuItem Header="_Archivo">
                         <MenuItem Header="Nuevo" InputGestureText="Ctrl+N" Command="{Binding FileCommands.CmdNew}"/>
-                        <MenuItem Header="Abrir..."  InputGestureText="Ctrl+A" Command="{Binding FileCommands.CmdOpen}" Background="Beige"/>
+                        <MenuItem Header="Abrir..."  InputGestureText="Ctrl+A" Command="{Binding FileCommands.CmdOpen}"/>
                         <MenuItem Header="Guardar" InputGestureText="Ctrl+G" Command="{Binding FileCommands.CmdSave}"/>
                         <MenuItem Header="Guardar como..." InputGestureText="Ctrl+Mayús+S" Command="{Binding FileCommands.CmdSaveAs}"/>
-						<Separator/>
-                        <MenuItem Header="Configurar página..." Command="" Background="Beige"/>
-                        <MenuItem Header="Imprimir..." InputGestureText="Ctrl+P" Command="ApplicationCommands.PrintPreview" Background="Beige"/>
                         <Separator/>
-                        <MenuItem Header="Salir" Command="{Binding FileCommands.CmdClose}" Background="Beige"/>
+                        <MenuItem Header="Configurar página..." Command="" Background="Beige"/>
+                        <MenuItem Header="Imprimir..." InputGestureText="Ctrl+P" Command="{Binding FileCommands.CmdPrint}" Background="#dfeddf"/>
+                        <Separator/>
+                        <MenuItem Header="Salir" Command="{Binding FileCommands.CmdClose}"/>
                     </MenuItem>
                     <MenuItem Header="_Edición">
                         <MenuItem Header="Deshacer" InputGestureText="Ctrl+Z" Command="ApplicationCommands.Undo"/>
@@ -58,7 +55,7 @@
                         <MenuItem Header="Ir a..." InputGestureText="Ctrl+T" Command="" Background="Beige"/>
                         <Separator/>
                         <MenuItem Header="Seleccionar todo" InputGestureText="Ctrl+E" Command="ApplicationCommands.SelectAll"/>
-                        <MenuItem Header="Hora y fecha" InputGestureText="F5" Command="{Binding EditCommands.CmdDate}" CommandParameter="{Binding ElementName=MainTextBox}"/>
+                        <MenuItem Header="Hora y fecha" InputGestureText="F5" Command="{Binding EditCommands.CmdDate}"  CommandParameter="{Binding ElementName=MainTextBox}"/>
                     </MenuItem>
                     <MenuItem Header="F_ormato">
                         <MenuItem Header="Ajuste de línea" Command="" Background="Beige"/>
@@ -79,30 +76,82 @@
                         <MenuItem Header="Acerca del Bloc de notas" Command="" Background="Beige"/>
                     </MenuItem>
                 </Menu.Items>
+            </Menu>
 
-			</Menu>
+            <DockPanel Background="#f0f0f0">
+                <Border BorderThickness="0,1,0,0" BorderBrush="#e1e1e1" DockPanel.Dock="Bottom">
+                    <StackPanel x:Name="BottomPanel"
+                                DockPanel.Dock="Bottom"
+                                Height="22"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
 
-			<DockPanel>
+                        <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="140" Height="22" Padding="7,0,0,0">
+                            <TextBlock x:Name="LineColBottomPanel"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Text="Ln 1, Col 1"/>
+                        </Border>
+
+                        <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="50" Height="22" Padding="7,0,0,0">
+                            <TextBlock x:Name="ZoomBottomPanel"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Text="100%"/>
+                        </Border>
+
+                        <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="120" Height="22" Padding="7,0,0,0">
+                            <TextBlock x:Name="CRLFBottomPanel"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Text="Windows (CRLF)"/>
+                        </Border>
+                    
+                        <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="120" Height="22" Padding="7,0,0,0">
+                            <TextBlock x:Name="EncodingBottomPanel"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Document.EncodingString}"/>
+                        </Border>
+
+                    </StackPanel>
+                </Border>
+                <!--
                 <TextBlock x:Name="BottomTextBlock"
-						DockPanel.Dock="Bottom"
-                        Height="20"
-                        Text=""/>
+						    DockPanel.Dock="Bottom"
+                            Height="22"
+                            Text=""/>
+                -->
 
-                <Border BorderBrush="#EAEAEA" BorderThickness="1">
-                    <TextBox
-                        x:Name="MainTextBox"
-                        DockPanel.Dock="Top"
-                        VerticalScrollBarVisibility="Visible"
-                        HorizontalScrollBarVisibility="Visible"
-                        AcceptsReturn="True"
-                        AcceptsTab="True"
-                        BorderThickness="0"
-                        Text="{Binding TextBoxText, UpdateSourceTrigger=PropertyChanged}"/>
+                <Border BorderBrush="#f1f1f1" BorderThickness="0, 2, 0, 1">
+                    <TextBox x:Name="MainTextBox"
+                             DockPanel.Dock="Top"
+                             VerticalScrollBarVisibility="Visible"
+                             HorizontalScrollBarVisibility="Visible"
+                             AcceptsReturn="True"
+                             AcceptsTab="True"
+                             BorderThickness="0"
+                             Text="{Binding MainWindow.Text, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="14"
+                             FontFamily="Consolas">
+
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
+                            <KeyBinding Command="ApplicationCommands.NotACommand" Modifiers="Ctrl" Key="A"/>
+                        </TextBox.InputBindings>
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding TextBoxChangedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                    </TextBox>
 
                 </Border>
             </DockPanel>
-		</DockPanel>
+        </DockPanel>
 
-	</Grid>
+    </Grid>
 
 </Window>

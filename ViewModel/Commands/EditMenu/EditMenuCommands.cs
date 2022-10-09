@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using NotepadPlusPlusPlus.Model;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands.Edit
 {
-    public class EditCommands : ViewModelBase
+    public class EditMenuCommands : ObservableObject
     {
         private readonly MainViewModel _mainViewModel;
 
-        public EditCommands(MainViewModel mainViewModel)
+        public EditMenuCommands(MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
 

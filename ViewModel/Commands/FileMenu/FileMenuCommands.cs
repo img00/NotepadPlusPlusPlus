@@ -4,22 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using NotepadPlusPlusPlus.Model;
+using NotepadPlusPlusPlus.ViewModel.Commands.FileMenu;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands.File
 {
-    public class FileCommands : ViewModelBase
+    public class FileMenuCommands : ObservableObject
     {
         private readonly MainViewModel _mainViewModel;
 
-        public FileCommands(MainViewModel mainViewModel)
+        public FileMenuCommands(MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
 
-            CmdNew = new CommandNew(mainViewModel);
-            CmdOpen = new CommandOpen();
+            CmdNew = new CommandNew(_mainViewModel);
+            CmdOpen = new CommandOpen(_mainViewModel);
             CmdSave = new CommandSave(_mainViewModel);
             CmdSaveAs = new CommandSaveAs(_mainViewModel);
-            CmdClose = new CommandClose();
+            CmdClose = new CommandClose(_mainViewModel);
+            CmdPrint = new CommandPrint(_mainViewModel);
         }
 
 
@@ -28,5 +31,6 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
         public ICommand CmdSave { get; set; }
         public ICommand CmdSaveAs { get; set; }
         public ICommand CmdClose { get; set; }
+        public ICommand CmdPrint { get; set; }
     }
 }

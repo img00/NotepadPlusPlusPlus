@@ -1,6 +1,5 @@
-﻿using System;
+﻿using NotepadPlusPlusPlus.ViewModel;
 using System.Windows;
-using System.Windows.Media.Imaging;
 
 /* 
  * To publish as single file, use 
@@ -16,6 +15,16 @@ namespace NotepadPlusPlusPlus
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ICloseWindow closeWindow)
+            {
+                closeWindow.Close += () => Close();
+
+                Closing += (s, e) => e.Cancel = !closeWindow.CanClose();
+            }
         }
     }
 }

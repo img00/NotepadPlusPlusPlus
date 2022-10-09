@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using NotepadPlusPlusPlus.Model;
 using System;
 using System.IO;
 
@@ -14,24 +15,21 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
             _mainViewModel = mainViewModel;
         }
 
-        //TODO: Save as logic
         public override void Execute(object? parameter)
         {
-            SaveAsDialog(_mainViewModel.TextBoxText ?? "", _mainViewModel);
+            SaveAs(_mainViewModel);
         }
 
-        public static void SaveAsDialog(String textToSave, MainViewModel model)
+        public static bool SaveAs(MainViewModel mainViewModel)
         {
+            // HACK: Save dialog on vm. Adapt to MVVM
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Archivo de texto (*.txt)|*.txt|Todos los archivos (*.*)|*.*";
             
-            if (saveFileDialog.ShowDialog() == false) return;
+            if (saveFileDialog.ShowDialog() == false) return false;
 
-
-            Model.File file = new Model.File(saveFileDialog.SafeFileName, saveFileDialog.FileName, textToSave);
-            System.IO.File.WriteAllText(file.Path, textToSave);
-            model.File = file;
-
+            CommandSave.Save(mainViewModel, saveFileDialog.SafeFileName, saveFileDialog.FileName, mainViewModel.MainWindow.Text);
+            return true;
         }
 
 
