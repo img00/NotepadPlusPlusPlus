@@ -52,14 +52,22 @@ namespace NotepadPlusPlusPlus.Model
             }
         }
 
+
+        public readonly float MaxZoomLevel = 5;
+        public readonly float MinZoomLevel = 0.1f;
         private float _zoomLevel;
         public float ZoomLevel
         {
             get => _zoomLevel;
             set
             {
-                _zoomLevel = value;
-                ZoomLevelFormatted = ((int) (Math.Ceiling(value * 10)) * 10) + "%";
+                // 1.1902
+                // * 10 -> 11.902
+                // Ceil -> 12
+                // /10  -> 1.20000000001
+                // Trun -> 1.2
+                _zoomLevel = (float) Math.Round(value, 1);
+                ZoomLevelFormatted = (int) Math.Round(_zoomLevel * 100f) + "%";
                 FontSizeWithZoom = value * FontSize;
                 OnPropertyChanged(nameof(ZoomLevel));
             }

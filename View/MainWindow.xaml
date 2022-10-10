@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:emi="clr-namespace:NotepadPlusPlusPlus.View.Extensions"
         mc:Ignorable="d"
         Icon="\Resources/MainIcon.ico"
         Loaded="Window_Loaded"
@@ -18,10 +19,15 @@
         <KeyBinding Command="{Binding FileCommands.CmdOpen}" Modifiers="Ctrl" Key="A"/>
         <KeyBinding Command="{Binding FileCommands.CmdSave}" Modifiers="Ctrl" Key="G"/>
         <KeyBinding Command="{Binding FileCommands.CmdSaveAs}" Modifiers="Ctrl+Shift" Key="S"/>
-        <KeyBinding Command="{Binding EditCommands.CmdDate}" CommandParameter="{Binding ElementName=MainTextBox}" Key="F5"/>
-        <KeyBinding Command="{Binding EditCommands.CmdSearchBing}" Modifiers="Ctrl" Key="F"/>
 
+        <KeyBinding Command="{Binding EditCommands.CmdSearchBing}" Modifiers="Ctrl" Key="F"/>
         <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
+        <KeyBinding Command="{Binding EditCommands.CmdDate}" CommandParameter="{Binding ElementName=MainTextBox}" Key="F5"/>
+
+        <KeyBinding Command="{Binding ViewCommands.CmdZoomIn}" Modifiers="Ctrl" Key="OemPlus"/>
+        <KeyBinding Command="{Binding ViewCommands.CmdZoomIn}" Modifiers="Ctrl" Key="Add"/>
+        <KeyBinding Command="{Binding ViewCommands.CmdZoomOut}" Modifiers="Ctrl" Key="OemMinus"/>
+        <KeyBinding Command="{Binding ViewCommands.CmdZoomOut}" Modifiers="Ctrl" Key="Subtract"/>
     </Window.InputBindings>
 
     <Grid>
@@ -40,6 +46,7 @@
                         <MenuItem Header="Salir" Command="{Binding FileCommands.CmdClose}"/>
                     </MenuItem>
                     <MenuItem Header="_Edición">
+                        <emi:ExtendedMenuItem></emi:ExtendedMenuItem>
                         <MenuItem Header="Deshacer" InputGestureText="Ctrl+Z" Command="ApplicationCommands.Undo"/>
                         <Separator/>
                         <MenuItem Header="Cortar" InputGestureText="Ctrl+X" Command="ApplicationCommands.Cut"/>
@@ -63,8 +70,8 @@
                     </MenuItem>
                     <MenuItem Header="_Ver">
                         <MenuItem Header="Zoom" Command="">
-                            <MenuItem Header="Acercar" InputGestureText="Ctrl+signo menos" Command="" Background="Beige"/>
-                            <MenuItem Header="Alejar" InputGestureText="Ctrl+signo más" Command="" Background="Beige"/>
+                            <MenuItem Header="Acercar" InputGestureText="Ctrl+signo más" Command="{Binding ViewCommands.CmdZoomIn}"/>
+                            <MenuItem Header="Alejar" InputGestureText="Ctrl+signo menos"  Command="{Binding ViewCommands.CmdZoomOut}"/>
                             <MenuItem Header="Restaurar zoom predeterminado" InputGestureText="Ctrl+0" Command="" Background="Beige"/>
                         </MenuItem>
                         <MenuItem Header="Barra de estado" IsCheckable="True" IsChecked="True" Command="{Binding ViewCommands.CmdStatusBar}"/>
@@ -86,13 +93,12 @@
                                 Height="22"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
-                        <Slider x:Name="Scale" DockPanel.Dock="Bottom" Minimum="0.1" Maximum="5" Value="{Binding MainWindow.ZoomLevel, UpdateSourceTrigger=PropertyChanged}" TickFrequency="0.1" IsSnapToTickEnabled="True" Width="150"/>
-
+                        
                         <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="140" Height="22" Padding="7,0,0,0">
                             <TextBlock x:Name="LineColBottomPanel"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
-                                       Text="Ln 1, Col 1"/>
+                                       Text="Línea 1, Columna 1"/>
                         </Border>
 
                         <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="50" Height="22" Padding="7,0,0,0">

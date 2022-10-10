@@ -19,8 +19,10 @@
     <SolidColorBrush x:Key="MenuItem.Highlight.Border" Color="Transparent"/>
 
     <SolidColorBrush x:Key="Menu.Disabled.Foreground" Color="#FF707070"/>
-    <SolidColorBrush x:Key="MenuItem.Highlight.Disabled.Background" Color="#0A000000"/>
+    
+    <SolidColorBrush x:Key="MenuItem.Highlight.Disabled.Background" Color="#e6e6e6"/>
     <SolidColorBrush x:Key="MenuItem.Highlight.Disabled.Border" Color="#21000000"/>
+    
     <SolidColorBrush x:Key="MenuItem.Selected.Border" Color="#FF26A0DA"/>
     <SolidColorBrush x:Key="MenuItem.Selected.Background" Color="#3D26A0DA"/>
     <Geometry x:Key="Checkmark">F1 M 10.0,1.2 L 4.7,9.1 L 4.5,9.1 L 0,5.2 L 1.3,3.5 L 4.3,6.1L 8.3,0 L 10.0,1.2 Z</Geometry>
@@ -44,6 +46,40 @@
                     <Path x:Name="Glyph" Data="{StaticResource Checkmark}" Fill="{StaticResource Menu.Static.Foreground}" FlowDirection="LeftToRight" Height="11" Width="10"/>
                 </Border>
                 <TextBlock x:Name="menuGestureText" Grid.Column="4" Margin="{TemplateBinding Padding}" Opacity="1" Text="{TemplateBinding InputGestureText}" VerticalAlignment="Center"/>
+                
+                
+                <Rectangle x:Name="Rect" IsEnabled="True">
+                    <Rectangle.Style>
+                        <Style TargetType="Rectangle">
+                            <Style.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Fill" Value="Red"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter Property="Fill" Value="Transparent"/>
+                                </Trigger>
+
+                                <!--
+                                <DataTrigger Binding="{Binding ElementName=menuGestureText, Path=IsEnabled}" Value="True">
+                                    <Setter Property="Fill" Value="Red"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=menuGestureText, Path=IsEnabled}" Value="False">
+                                        <Setter Property="Fill" Value="Cyan"/>
+                                </DataTrigger>
+                                    
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=IsMouseOver}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Fill" Value="Green"/>
+                                </MultiDataTrigger>-->
+                            </Style.Triggers>
+                        </Style>
+                    </Rectangle.Style>
+                </Rectangle>
+                
+                
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -60,11 +96,20 @@
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{StaticResource Menu.Disabled.Foreground}"/>
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsHighlighted" Value="True"/>
+                    <Condition Property="IsEnabled" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource MenuItem.Highlight.Disabled.Background}"/>
+                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource MenuItem.Highlight.Disabled.Border}"/>
+            </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <SolidColorBrush x:Key="Menu.Static.Border" Color="#FF999999"/>
     <SolidColorBrush x:Key="Menu.Static.Background" Color="#FFF0F0F0"/>
     <SolidColorBrush x:Key="Menu.Static.Separator" Color="#FFD7D7D7"/>
+
 
     <ControlTemplate x:Key="{ComponentResourceKey ResourceId=TopLevelHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
         <Border x:Name="templateRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">

@@ -17,8 +17,12 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.ViewMenu
             _mainViewModel = mainViewModel;
 
             CmdStatusBar = new CommandStatusBar(mainViewModel);
+            CmdZoomIn = new CommandZoomIn(mainViewModel);
+            CmdZoomOut = new CommandZoomOut(mainViewModel);
         }
 
-        public ICommand CmdStatusBar { get; set; }
+        public ICommand CmdStatusBar { get; }
+        public ICommand CmdZoomIn { get; }
+        public ICommand CmdZoomOut { get; }
     }
 }
