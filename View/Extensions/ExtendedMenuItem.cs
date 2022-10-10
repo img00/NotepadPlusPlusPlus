@@ -11,7 +11,6 @@ namespace NotepadPlusPlusPlus.View.Extensions
     {
         public ExtendedMenuItem()
         {
-            InitializeComponent();
             PreviewMouseUp += ExtendedMenuItem_PreviewMouseUp;
         }
 

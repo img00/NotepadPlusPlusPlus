@@ -40,6 +40,17 @@ namespace NotepadPlusPlusPlus.Model
             }
         }
 
+        private string _selectedText;
+        public string SelectedText
+        {
+            get => _selectedText;
+            set
+            {
+                _selectedText = value;
+                OnPropertyChanged(nameof(SelectedText));
+            }
+        }
+
         private int _fontSize;
         public int FontSize
         {
@@ -61,11 +72,6 @@ namespace NotepadPlusPlusPlus.Model
             get => _zoomLevel;
             set
             {
-                // 1.1902
-                // * 10 -> 11.902
-                // Ceil -> 12
-                // /10  -> 1.20000000001
-                // Trun -> 1.2
                 _zoomLevel = (float) Math.Round(value, 1);
                 ZoomLevelFormatted = (int) Math.Round(_zoomLevel * 100f) + "%";
                 FontSizeWithZoom = value * FontSize;

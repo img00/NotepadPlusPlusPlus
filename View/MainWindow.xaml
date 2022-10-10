@@ -26,8 +26,13 @@
 
         <KeyBinding Command="{Binding ViewCommands.CmdZoomIn}" Modifiers="Ctrl" Key="OemPlus"/>
         <KeyBinding Command="{Binding ViewCommands.CmdZoomIn}" Modifiers="Ctrl" Key="Add"/>
+        <MouseBinding Command="{Binding ViewCommands.CmdZoomIn}" Gesture="{x:Static ex:MouseWheelGesture.CtrlUp}"/>
         <KeyBinding Command="{Binding ViewCommands.CmdZoomOut}" Modifiers="Ctrl" Key="OemMinus"/>
         <KeyBinding Command="{Binding ViewCommands.CmdZoomOut}" Modifiers="Ctrl" Key="Subtract"/>
+        <MouseBinding Command="{Binding ViewCommands.CmdZoomOut}" Gesture="{x:Static ex:MouseWheelGesture.CtrlDown}"/>
+        <KeyBinding Command="{Binding ViewCommands.CmdZoomReset}" Modifiers="Ctrl" Key="D0"/>
+        <KeyBinding Command="{Binding ViewCommands.CmdZoomReset}" Modifiers="Ctrl" Key="NumPad0"/>
+        
     </Window.InputBindings>
 
     <Grid>
@@ -71,7 +76,7 @@
                         <MenuItem Header="Zoom" Command="">
                             <MenuItem Header="Acercar" InputGestureText="Ctrl+signo más" Command="{Binding ViewCommands.CmdZoomIn}"/>
                             <MenuItem Header="Alejar" InputGestureText="Ctrl+signo menos"  Command="{Binding ViewCommands.CmdZoomOut}"/>
-                            <MenuItem Header="Restaurar zoom predeterminado" InputGestureText="Ctrl+0" Command="" Background="Beige"/>
+                            <MenuItem Header="Restaurar zoom predeterminado" InputGestureText="Ctrl+0" Command="{Binding ViewCommands.CmdZoomReset}"/>
                         </MenuItem>
                         <MenuItem Header="Barra de estado" IsCheckable="True" IsChecked="True" Command="{Binding ViewCommands.CmdStatusBar}"/>
                     </MenuItem>
@@ -141,7 +146,8 @@
                              Text="{Binding MainWindow.Text, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="{Binding MainWindow.FontSizeWithZoom}"
                              TextWrapping="{Binding MainWindow.TextWrap}"
-                             FontFamily="Consolas">
+                             FontFamily="Consolas"
+                             ex:TextBoxHelper.SelectedText="{Binding MainWindow.SelectedText}">
 
                         <TextBox.InputBindings>
                             <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
