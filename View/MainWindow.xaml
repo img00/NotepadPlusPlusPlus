@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:emi="clr-namespace:NotepadPlusPlusPlus.View.Extensions"
+        xmlns:ex="clr-namespace:NotepadPlusPlusPlus.View.Extensions"
         mc:Ignorable="d"
         Icon="\Resources/MainIcon.ico"
         Loaded="Window_Loaded"
@@ -46,19 +46,18 @@
                         <MenuItem Header="Salir" Command="{Binding FileCommands.CmdClose}"/>
                     </MenuItem>
                     <MenuItem Header="_Edición">
-                        <emi:ExtendedMenuItem></emi:ExtendedMenuItem>
-                        <MenuItem Header="Deshacer" InputGestureText="Ctrl+Z" Command="ApplicationCommands.Undo"/>
+                        <ex:ExtendedMenuItem Header="Deshacer" InputGestureText="Ctrl+Z" Command="ApplicationCommands.Undo"/>
                         <Separator/>
-                        <MenuItem Header="Cortar" InputGestureText="Ctrl+X" Command="ApplicationCommands.Cut"/>
-                        <MenuItem Header="Copiar" InputGestureText="Ctrl+C" Command="ApplicationCommands.Copy"/>
-                        <MenuItem Header="Pegar" InputGestureText="Ctrl+V" Command="ApplicationCommands.Paste"/>
-                        <MenuItem Header="Eliminar" InputGestureText="Delete" Command="EditingCommands.Delete" />
+                        <ex:ExtendedMenuItem Header="Cortar" InputGestureText="Ctrl+X" Command="ApplicationCommands.Cut"/>
+                        <ex:ExtendedMenuItem Header="Copiar" InputGestureText="Ctrl+C" Command="ApplicationCommands.Copy"/>
+                        <ex:ExtendedMenuItem Header="Pegar" InputGestureText="Ctrl+V" Command="ApplicationCommands.Paste"/>
+                        <MenuItem Header="Eliminar" InputGestureText="Delete" Command="EditingCommands.Delete"/>
                         <Separator/>
-                        <MenuItem Header="Búsqueda con Bing..." InputGestureText="Ctrl+F" Command="{Binding EditCommands.CmdSearchBing}"/>
-                        <MenuItem Header="Buscar..." InputGestureText="Ctrl+B" Command="" Background="Beige"/>
-                        <MenuItem Header="Buscar siguiente" InputGestureText="F3" Command="" Background="Beige"/>
-                        <MenuItem Header="Buscar anterior" InputGestureText="Mayús+F3" Command="" Background="Beige"/>
-                        <MenuItem Header="Reemplazar..." InputGestureText="Ctrl+R" Command="" Background="Beige"/>
+                        <ex:ExtendedMenuItem Header="Búsqueda con Bing..." InputGestureText="Ctrl+F" Command="{Binding EditCommands.CmdSearchBing}"/>
+                        <ex:ExtendedMenuItem Header="Buscar..." InputGestureText="Ctrl+B" Command="" Background="Beige"/>
+                        <ex:ExtendedMenuItem Header="Buscar siguiente" InputGestureText="F3" Command="" Background="Beige"/>
+                        <ex:ExtendedMenuItem Header="Buscar anterior" InputGestureText="Mayús+F3" Command="" Background="Beige"/>
+                        <ex:ExtendedMenuItem Header="Reemplazar..." InputGestureText="Ctrl+R" Command="" Background="Beige"/>
                         <MenuItem Header="Ir a..." InputGestureText="Ctrl+T" Command="" Background="Beige"/>
                         <Separator/>
                         <MenuItem Header="Seleccionar todo" InputGestureText="Ctrl+E" Command="ApplicationCommands.SelectAll"/>

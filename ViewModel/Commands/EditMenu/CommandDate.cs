@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Windows.Input;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands.Edit
 {

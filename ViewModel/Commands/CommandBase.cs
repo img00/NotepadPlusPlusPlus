@@ -9,7 +9,21 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands
 {
     public abstract class CommandBase : ICommand
     {
-        public event EventHandler? CanExecuteChanged;
+        private EventHandler? _canExecuteChanged;
+        public event EventHandler? CanExecuteChanged
+        {
+            add
+            {
+                _canExecuteChanged += value;
+                CommandManager.RequerySuggested += value;
+            }
+
+            remove
+            {
+                _canExecuteChanged -= value;
+                CommandManager.RequerySuggested -= value;
+            }
+        }
 
         public virtual bool CanExecute(object? parameter) => true;
 
@@ -17,7 +31,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands
 
         protected void OnCanExecuteChanged()
         {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
+            _canExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }
