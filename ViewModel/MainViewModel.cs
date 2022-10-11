@@ -30,6 +30,9 @@ namespace NotepadPlusPlusPlus.ViewModel
             ViewCommands = new ViewMenuCommands(this);
 
             TextBoxChangedCommand = new TextBoxChangedCommand(this);
+
+            MainWindow.SelectedText = "AAAAAAA";
+            string a = MainWindow.SelectedText;
         }
 
         public MainWindowModel MainWindow { get; } = new MainWindowModel();

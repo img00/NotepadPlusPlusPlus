@@ -18,7 +18,7 @@ namespace NotepadPlusPlusPlus.View.Extensions
         // because the button is not really disabled and still detects clicks.
         private void ExtendedMenuItem_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (!Command.CanExecute(null))
+            if (Tag.Equals("Disabled"))
                 e.Handled = true;
         }
 
