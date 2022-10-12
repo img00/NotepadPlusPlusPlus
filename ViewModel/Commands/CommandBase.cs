@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands
 {
     public abstract class CommandBase : ICommand
     {
+        protected MainViewModel MainViewModel => App.MainViewModel;
+
         private EventHandler? _canExecuteChanged;
         public event EventHandler? CanExecuteChanged
         {
@@ -29,9 +27,6 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands
 
         public abstract void Execute(object? parameter);
 
-        protected void OnCanExecuteChanged()
-        {
-            _canExecuteChanged?.Invoke(this, new EventArgs());
-        }
+        protected void OnCanExecuteChanged() => _canExecuteChanged?.Invoke(this, new EventArgs());
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Input;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands.Edit
 {
@@ -7,13 +6,10 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.Edit
     {
         public override void Execute(object? parameter)
         {
-            System.Windows.Controls.TextBox? textBox = parameter as System.Windows.Controls.TextBox;
-            if (textBox != null)
-            {
-                DateTime now = DateTime.Now;
-                textBox.SelectedText = $"{now:t} {now:d}";
-                textBox.Select(textBox.SelectionStart + textBox.SelectionLength, 0);
-            }
+            DateTime now = DateTime.Now;
+            MainViewModel.MainWindow.SelectedText = $"{now:t} {now:d}";
+            MainViewModel.MainWindow.SelectionStart += MainViewModel.MainWindow.SelectionLength;
+            MainViewModel.MainWindow.SelectionLength = 0;
         }
     }
 }

@@ -3,32 +3,23 @@ using System;
 using System.IO;
 using System.Text;
 using System.Windows;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands.File
 {
     public class CommandOpen : CommandBase
     {
-        private MainViewModel _mainViewModel;
-
-        public CommandOpen(MainViewModel mainViewModel)
-        {
-            _mainViewModel = mainViewModel;
-        }
-
-        //TODO: Open file logic
         public override void Execute(object? parameter)
         {
             // TODO: This logic is repeated 3 times throught the code (close, open, new). Move to its own method
             // HACK: Message box on vm. Adapt to MVVM
-            if (_mainViewModel.Document.Unsaved)
+            if (MainViewModel.Document.Unsaved)
             {
-                MessageBoxResult result = MessageBox.Show($"¿Deseas guardar los cambios de {_mainViewModel.Document.Name}?", "Bloc de notas", MessageBoxButton.YesNoCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
+                MessageBoxResult result = MessageBox.Show($"¿Deseas guardar los cambios de {MainViewModel.Document.Name}?", "Bloc de notas", MessageBoxButton.YesNoCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
                 if (result == MessageBoxResult.Cancel)
                     return;
                 if (result == MessageBoxResult.Yes)
                 {
-                    bool hasSaved = ((CommandSave)_mainViewModel.FileCommands.CmdSave).Save();
+                    bool hasSaved = ((CommandSave)MainViewModel.FileCommands.CmdSave).Save();
                     if (!hasSaved) return;
                 }
             }
@@ -44,13 +35,13 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
 
             if (openFileDialog.ShowDialog() == false) return;
 
-            _mainViewModel.Document.Name = openFileDialog.SafeFileName;
-            _mainViewModel.Document.Path = openFileDialog.FileName;
+            MainViewModel.Document.Name = openFileDialog.SafeFileName;
+            MainViewModel.Document.Path = openFileDialog.FileName;
             String newText = System.IO.File.ReadAllText(openFileDialog.FileName);
-            _mainViewModel.Document.Text = newText;
-            _mainViewModel.MainWindow.Text = newText;
-            _mainViewModel.Document.Encoding = GetDocumentEncoding(openFileDialog.FileName);
-            _mainViewModel.Document.Unsaved = false;
+            MainViewModel.Document.Text = newText;
+            MainViewModel.MainWindow.Text = newText;
+            MainViewModel.Document.Encoding = GetDocumentEncoding(openFileDialog.FileName);
+            MainViewModel.Document.Unsaved = false;
         }
 
         private static Encoding GetDocumentEncoding(string filePath)

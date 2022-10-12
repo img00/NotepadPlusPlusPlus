@@ -10,12 +10,13 @@ namespace NotepadPlusPlusPlus
 {
     public partial class App : Application
     {
+        public static MainViewModel MainViewModel = new();
 
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel()
+                DataContext = MainViewModel
             };
             MainWindow.Show();
 

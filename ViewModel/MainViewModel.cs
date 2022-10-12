@@ -1,38 +1,28 @@
 ﻿using NotepadPlusPlusPlus.Model;
+using NotepadPlusPlusPlus.ViewModel.Commands.Chat;
 using NotepadPlusPlusPlus.ViewModel.Commands.Edit;
 using NotepadPlusPlusPlus.ViewModel.Commands.File;
 using NotepadPlusPlusPlus.ViewModel.Commands.Format;
+using NotepadPlusPlusPlus.ViewModel.Commands.HelpMenu;
 using NotepadPlusPlusPlus.ViewModel.Commands.ViewMenu;
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace NotepadPlusPlusPlus.ViewModel
 {
     public class MainViewModel : ObservableObject, ICloseWindow
     {
-        public FileMenuCommands FileCommands { get; }
-        public EditMenuCommands EditCommands { get; }
-        public FormatMenuCommands FormatCommands { get; }
-        public ViewMenuCommands ViewCommands { get; }
+        public FileMenuCommands FileCommands { get; } = new FileMenuCommands();
+        public EditMenuCommands EditCommands { get; } = new EditMenuCommands();
+        public FormatMenuCommands FormatCommands { get; } = new FormatMenuCommands();
+        public ViewMenuCommands ViewCommands { get; } = new ViewMenuCommands();
+        public HelpMenuCommands HelpCommands { get; } = new HelpMenuCommands();
+        public ChatCommands ChatCommands { get; } = new ChatCommands();
 
         public MainViewModel()
         {
             MainWindow.Title = $"{Document.Name}: Bloc de notas";
             Document.PropertyChanged += (_, e) => DocumentChanged();
-
-            FileCommands = new FileMenuCommands(this);
-            EditCommands = new EditMenuCommands(this);
-            FormatCommands = new FormatMenuCommands(this);
-            ViewCommands = new ViewMenuCommands(this);
-
-            TextBoxChangedCommand = new TextBoxChangedCommand(this);
-
-            MainWindow.SelectedText = "AAAAAAA";
-            string a = MainWindow.SelectedText;
         }
 
         public MainWindowModel MainWindow { get; } = new MainWindowModel();
@@ -52,7 +42,7 @@ namespace NotepadPlusPlusPlus.ViewModel
         /// </summary>
         public Action? Close { get; set; }
 
-        public ICommand TextBoxChangedCommand { get; }
+        public ICommand TextBoxChangedCommand { get; } = new TextBoxChangedCommand();
     }
 
     interface ICloseWindow

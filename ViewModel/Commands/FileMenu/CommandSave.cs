@@ -1,38 +1,25 @@
-﻿using Microsoft.Win32;
-using NotepadPlusPlusPlus.Model;
-using System;
-using System.Linq;
-using System.Windows;
+﻿using NotepadPlusPlusPlus.Model;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands.File
 {
     public class CommandSave : CommandBase
     {
-        private MainViewModel _mainViewModel;
-
-        public CommandSave(MainViewModel mainViewModel)
-        {
-            _mainViewModel = mainViewModel;
-        }
-
-        public override void Execute(object? parameter)
-        {
-            Save();
-        }
+        public override void Execute(object? parameter) => Save();
 
         public bool Save()
         {
-            DocumentModel document = _mainViewModel.Document;
+            DocumentModel document = MainViewModel.Document;
 
-            if (_mainViewModel.Document.Path.Equals(""))
-                return CommandSaveAs.SaveAs(_mainViewModel);
+            if (MainViewModel.Document.Path.Equals(""))
+                return CommandSaveAs.SaveAs();
 
-            Save(_mainViewModel, document.Name, document.Path, _mainViewModel.MainWindow.Text);
+            Save(document.Name, document.Path, MainViewModel.MainWindow.Text);
             return true;
         }
 
-        public static void Save(MainViewModel mainViewModel, string name, string path, string text)
+        public static void Save(string name, string path, string text)
         {
+            MainViewModel mainViewModel = App.MainViewModel;
             mainViewModel.Document.Name = name;
             mainViewModel.Document.Path = path;
             mainViewModel.Document.Text = text;
@@ -41,5 +28,4 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
             System.IO.File.WriteAllText(path, text, mainViewModel.Document.Encoding);
         }
     }
-
 }

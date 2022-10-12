@@ -15,10 +15,20 @@
 	<ApplicationIcon>Resources\MainIcon.ico</ApplicationIcon>
 
 	<ApplicationManifest>app.manifest</ApplicationManifest>
+
+	<UseWindowsForms>True</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\WindowIcon.ico" />
+    <None Remove="Resources\_MainIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\MainIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\_MainIcon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

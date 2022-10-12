@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Diagnostics;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands.Edit
 {
-    internal class CommandSearchBing : CommandBase
+    public class CommandSearchBing : CommandBase
     {
-        //TODO: Do not search if nothing is selected
         public override void Execute(object? parameter)
         {
-            System.Diagnostics.Process.Start("explorer.exe", "https://youtu.be/dQw4w9WgXcQ");
+            string link = "https://www.google.com/search?q=" + MainViewModel.MainWindow.SelectedText;
+            Process.Start(new ProcessStartInfo(link) { UseShellExecute = true });
         }
+
+        public override bool CanExecute(object? parameter) =>
+            MainViewModel.MainWindow.SelectionLength > 0;
     }
 }

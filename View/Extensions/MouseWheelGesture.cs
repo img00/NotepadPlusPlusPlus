@@ -12,7 +12,7 @@ namespace NotepadPlusPlusPlus.View.Extensions
         public WheelDirection Direction { get; set; }
         public override bool Matches(object targetElement, InputEventArgs inputEventArgs)
         {
-            return  base.Matches(targetElement, inputEventArgs)
+            return base.Matches(targetElement, inputEventArgs)
                     && inputEventArgs is MouseWheelEventArgs args
                     && Direction switch
                     {

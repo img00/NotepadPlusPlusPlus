@@ -6,8 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:ex="clr-namespace:NotepadPlusPlusPlus.View.Extensions"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
-        Icon="\Resources/MainIcon.ico"
         Loaded="Window_Loaded"
         Title="{Binding MainWindow.Title}"
         Height="450" Width="800"
@@ -81,8 +81,8 @@
                         <MenuItem Header="Barra de estado" IsCheckable="True" IsChecked="True" Command="{Binding ViewCommands.CmdStatusBar}"/>
                     </MenuItem>
                     <MenuItem Header="_Ayuda">
-                        <MenuItem Header="Ver la ayuda" Command="" Background="Beige"/>
-                        <MenuItem Header="Enviar comentarios" Command="" Background="Beige"/>
+                        <MenuItem Header="Ver la ayuda" Command="{Binding HelpCommands.CmdSeeHelp}"/>
+                        <MenuItem Header="Enviar comentarios" Command="{Binding HelpCommands.CmdFeedback}"/>
                         <Separator/>
                         <MenuItem Header="Acerca del Bloc de notas" Command="" Background="Beige"/>
                     </MenuItem>
@@ -97,12 +97,12 @@
                                 Height="22"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
-                        
+
                         <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="140" Height="22" Padding="7,0,0,0">
                             <TextBlock x:Name="LineColBottomPanel"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
-                                       Text="Línea 1, Columna 1"/>
+                                       Text="{Binding MainWindow.LineColFormatted}"/>
                         </Border>
 
                         <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="50" Height="22" Padding="7,0,0,0">
@@ -118,25 +118,25 @@
                                        VerticalAlignment="Center"
                                        Text="Windows (CRLF)"/>
                         </Border>
-                    
-                        <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="120" Height="22" Padding="7,0,0,0">
+
+                        <Border x:Name="BorderEncoding" BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="120" Height="22" Padding="7,0,0,0">
                             <TextBlock x:Name="EncodingBottomPanel"
-                                       HorizontalAlignment="Left"
+                                       HorizontalAlignment="Stretch"
                                        VerticalAlignment="Center"
                                        Text="{Binding Document.EncodingString}"/>
+
+                            <Border.InputBindings>
+                                <MouseBinding Command="{Binding ChatCommands.CmdSwitch}" Gesture="LeftDoubleClick"/>
+                            </Border.InputBindings>
                         </Border>
 
                     </StackPanel>
                 </Border>
-                <!--
-                <TextBlock x:Name="BottomTextBlock"
-						    DockPanel.Dock="Bottom"
-                            Height="22"
-                            Text=""/>
-                -->
+                
 
                 <Border BorderBrush="#f1f1f1" BorderThickness="0, 2, 0, 1">
-                    <TextBox x:Name="MainTextBox"
+                    
+                    <ex:ExtendedTextBox x:Name="MainTextBox"
                              ScrollViewer.HorizontalScrollBarVisibility="Visible"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
                              DockPanel.Dock="Top"
@@ -147,7 +147,10 @@
                              FontSize="{Binding MainWindow.FontSizeWithZoom}"
                              TextWrapping="{Binding MainWindow.TextWrap}"
                              FontFamily="Consolas"
-                             ex:TextBoxHelper.SelectedText="{Binding MainWindow.SelectedText}">
+                             ex:TextBoxHelper.SelectedText="{Binding MainWindow.SelectedText}"
+                             ex:TextBoxHelper.SelectionStart="{Binding MainWindow.SelectionStart}"
+                             ex:TextBoxHelper.SelectionLength="{Binding MainWindow.SelectionLength}"
+                             ex:TextBoxHelper.CaretIndex="{Binding MainWindow.CaretIndex}">
 
                         <TextBox.InputBindings>
                             <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
@@ -160,8 +163,28 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
 
-                    </TextBox>
+                    </ex:ExtendedTextBox>
+
+
+                    <!--
+                    <WindowsFormsHost DockPanel.Dock="Top">
+                        
+                        <wf:TextBox x:Name="MainTextBox"
+                        AcceptsReturn="True"
+                        AcceptsTab="True"
+                        Multiline="True"
+                        BorderStyle="None"
+                        ScrollBars="Both"
+                        WordWrap="False">
+
+
+
+                        </wf:TextBox>
+                    </WindowsFormsHost>-->
+
                 </Border>
+
+
             </DockPanel>
         </DockPanel>
 
