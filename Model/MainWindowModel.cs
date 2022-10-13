@@ -22,7 +22,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _title = value;
-                OnPropertyChanged(nameof(Title));
+                OnPropertyChanged();
             }
         }
 
@@ -33,7 +33,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _displayedText = value;
-                OnPropertyChanged(nameof(DisplayedText));
+                OnPropertyChanged();
             }
         }
 
@@ -44,7 +44,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _selectedText = value;
-                OnPropertyChanged(nameof(SelectedText));
+                OnPropertyChanged();
             }
         }
 
@@ -55,7 +55,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _selectionStart = value;
-                OnPropertyChanged(nameof(SelectionStart));
+                OnPropertyChanged();
             }
         }
 
@@ -71,8 +71,8 @@ namespace NotepadPlusPlusPlus.Model
             {
                 if (SelectionLength == 0) _lastCaretBeforeSelection = value;
                 _caretIndex = value;
-                OnPropertyChanged(nameof(CaretIndex));
-                
+                OnPropertyChanged();
+
                 // This line is important because the caret stays at the lowest index of the selection,
                 // so we need to increase it by the length if going to the right to show the correct column
                 int caretPosWithLength = _lastCaretBeforeSelection > value ? value : value + SelectionLength;
@@ -100,7 +100,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _lineColFormatted = value;
-                OnPropertyChanged(nameof(LineColFormatted));
+                OnPropertyChanged();
             }
         }
 
@@ -111,7 +111,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _selectionLength = value;
-                OnPropertyChanged(nameof(SelectionLength));
+                OnPropertyChanged();
             }
         }
 
@@ -123,8 +123,8 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _fontSize = value;
-                FontSizeWithZoom = value * ZoomLevel;
-                OnPropertyChanged(nameof(FontSize));
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(FontSizeWithZoom));
             }
         }
 
@@ -138,33 +138,16 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _zoomLevel = (float)Math.Round(value, 1);
-                ZoomLevelFormatted = (int)Math.Round(_zoomLevel * 100f) + "%";
-                FontSizeWithZoom = value * FontSize;
-                OnPropertyChanged(nameof(ZoomLevel));
-            }
-        }
-
-        private string _zoomLevelFormatted;
-        public string ZoomLevelFormatted
-        {
-            get => _zoomLevelFormatted;
-            set
-            {
-                _zoomLevelFormatted = value;
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(ZoomLevelFormatted));
-            }
-        }
-
-        private float _fontSizeWithZoom;
-        public float FontSizeWithZoom
-        {
-            get => _fontSizeWithZoom;
-            set
-            {
-                _fontSizeWithZoom = value;
                 OnPropertyChanged(nameof(FontSizeWithZoom));
             }
         }
+
+        public string ZoomLevelFormatted => (int)Math.Round(ZoomLevel * 100f) + "%";
+
+        public float FontSizeWithZoom => ZoomLevel * FontSize;
+
 
         private TextWrapping _textWrap;
         public TextWrapping TextWrap
@@ -173,7 +156,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _textWrap = value;
-                OnPropertyChanged(nameof(TextWrap));
+                OnPropertyChanged();
             }
         }
 
@@ -184,7 +167,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _statusBar = value;
-                OnPropertyChanged(nameof(StatusBar));
+                OnPropertyChanged();
             }
         }
 
@@ -195,7 +178,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _isChatting = value;
-                OnPropertyChanged(nameof(IsChatting));
+                OnPropertyChanged();
             }
         }
 

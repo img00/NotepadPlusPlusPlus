@@ -89,6 +89,7 @@
                 </Menu.Items>
             </Menu>
 
+
             <DockPanel x:Name="DockPanel" Background="#f0f0f0">
 
                 <Border x:Name="StatusBar" BorderThickness="0,1,0,0" BorderBrush="#e1e1e1" DockPanel.Dock="Bottom" Visibility="{Binding MainWindow.StatusBar}">

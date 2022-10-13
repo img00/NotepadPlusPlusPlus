@@ -20,7 +20,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _name = !value.Equals("") ? value : "Sin título";
-                OnPropertyChanged(nameof(Name));
+                OnPropertyChanged();
             }
         }
         private string? _path;
@@ -30,7 +30,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _path = value;
-                OnPropertyChanged(nameof(Path));
+                OnPropertyChanged();
             }
         }
 
@@ -41,7 +41,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _text = value;
-                OnPropertyChanged(nameof(Text));
+                OnPropertyChanged();
             }
         }
 
@@ -52,7 +52,7 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _unsaved = value;
-                OnPropertyChanged(nameof(Unsaved));
+                OnPropertyChanged();
             }
         }
 
@@ -63,21 +63,12 @@ namespace NotepadPlusPlusPlus.Model
             set
             {
                 _encoding = value;
-                EncodingString = value.BodyName.ToUpper();
-                OnPropertyChanged(nameof(Encoding));
+                OnPropertyChanged();
+                OnPropertyChanged(EncodingString);
             }
         }
 
-        private string _encodingString;
-        public string EncodingString
-        {
-            get => _encodingString;
-            set
-            {
-                _encodingString = value;
-                OnPropertyChanged(nameof(EncodingString));
-            }
-        }
+        public string EncodingString => Encoding.BodyName.ToUpper();
 
     }
 }

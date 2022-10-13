@@ -29,7 +29,12 @@ namespace NotepadPlusPlusPlus.ViewModel
             if (parameter == null) return;
 
             KeyEventArgs e = (KeyEventArgs)parameter;
-            e.Handled = true;
+
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.V)
+            {
+                e.Handled = true;
+            }
+
         }
 
         public override bool CanExecute(object? parameter)
