@@ -6,7 +6,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.Chat
     {
         public override void Execute(object? parameter)
         {
-            MainViewModel.MainWindow.IsChatting = !MainViewModel.MainWindow.IsChatting;
+            MainViewModel.ChatViewModel.SwitchChat(!MainViewModel.MainWindow.IsChatting);
         }
     }
 }

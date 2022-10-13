@@ -26,14 +26,14 @@ namespace NotepadPlusPlusPlus.Model
             }
         }
 
-        private string? _text;
-        public string Text
+        private string? _displayedText;
+        public string DisplayedText
         {
-            get => _text ?? "";
+            get => _displayedText ?? "";
             set
             {
-                _text = value;
-                OnPropertyChanged(nameof(Text));
+                _displayedText = value;
+                OnPropertyChanged(nameof(DisplayedText));
             }
         }
 
@@ -80,7 +80,7 @@ namespace NotepadPlusPlusPlus.Model
                 int index = -1;
                 int currentLineStart = 0;
                 int rows = 1;
-                string substring = caretPosWithLength > 2 ? Text[..caretPosWithLength] : Text;
+                string substring = caretPosWithLength > 2 ? DisplayedText[..caretPosWithLength] : DisplayedText;
                 while ((index = substring.IndexOf(Environment.NewLine, index + 1)) != -1 && index < caretPosWithLength)
                 {
                     currentLineStart = index + Environment.NewLine.Length;

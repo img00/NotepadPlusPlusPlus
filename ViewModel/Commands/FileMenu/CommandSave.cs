@@ -13,7 +13,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
             if (MainViewModel.Document.Path.Equals(""))
                 return CommandSaveAs.SaveAs();
 
-            Save(document.Name, document.Path, MainViewModel.MainWindow.Text);
+            Save(document.Name, document.Path, MainViewModel.MainWindow.DisplayedText);
             return true;
         }
 

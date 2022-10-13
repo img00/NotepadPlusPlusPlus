@@ -39,7 +39,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
             MainViewModel.Document.Path = openFileDialog.FileName;
             String newText = System.IO.File.ReadAllText(openFileDialog.FileName);
             MainViewModel.Document.Text = newText;
-            MainViewModel.MainWindow.Text = newText;
+            MainViewModel.MainWindow.DisplayedText = newText;
             MainViewModel.Document.Encoding = GetDocumentEncoding(openFileDialog.FileName);
             MainViewModel.Document.Unsaved = false;
         }

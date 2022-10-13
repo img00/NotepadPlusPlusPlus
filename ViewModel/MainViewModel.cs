@@ -10,8 +10,9 @@ using System.Windows.Input;
 
 namespace NotepadPlusPlusPlus.ViewModel
 {
-    public class MainViewModel : ObservableObject, ICloseWindow
+    public class MainViewModel : ICloseWindow
     {
+        public ChatViewModel ChatViewModel { get; }
         public FileMenuCommands FileCommands { get; } = new FileMenuCommands();
         public EditMenuCommands EditCommands { get; } = new EditMenuCommands();
         public FormatMenuCommands FormatCommands { get; } = new FormatMenuCommands();
@@ -21,14 +22,20 @@ namespace NotepadPlusPlusPlus.ViewModel
 
         public MainViewModel()
         {
+            ChatViewModel = new ChatViewModel(this);
             MainWindow.Title = $"{Document.Name}: Bloc de notas";
             Document.PropertyChanged += (_, e) => DocumentChanged();
         }
 
         public MainWindowModel MainWindow { get; } = new MainWindowModel();
         public DocumentModel Document { get; } = new DocumentModel();
-        private void DocumentChanged()
+        public void DocumentChanged()
         {
+            if (MainWindow.IsChatting) 
+            { 
+                MainWindow.Title = "Chat: Bloc de notas";
+                return;
+            }
             MainWindow.Title = (Document.Unsaved ? "*" : "")
                              + Document.Name
                              + ": Bloc de notas";

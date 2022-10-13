@@ -19,7 +19,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
 
             if (saveFileDialog.ShowDialog() == false) return false;
 
-            CommandSave.Save(saveFileDialog.SafeFileName, saveFileDialog.FileName, mainViewModel.MainWindow.Text);
+            CommandSave.Save(saveFileDialog.SafeFileName, saveFileDialog.FileName, mainViewModel.MainWindow.DisplayedText);
             return true;
         }
 

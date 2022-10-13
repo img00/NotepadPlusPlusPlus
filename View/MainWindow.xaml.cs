@@ -12,6 +12,7 @@ namespace NotepadPlusPlusPlus
             InitializeComponent();
         }
 
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (DataContext is ICloseWindow closeWindow)
