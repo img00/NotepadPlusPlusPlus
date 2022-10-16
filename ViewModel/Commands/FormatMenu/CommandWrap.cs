@@ -6,10 +6,10 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.Format
     {
         public override void Execute(object? parameter)
         {
-            if (MainViewModel.MainWindow.TextWrap.Equals(TextWrapping.NoWrap))
-                MainViewModel.MainWindow.TextWrap = TextWrapping.Wrap;
+            if (MainViewModel.MainWindowModel.TextWrap.Equals(TextWrapping.NoWrap))
+                MainViewModel.MainWindowModel.TextWrap = TextWrapping.Wrap;
             else
-                MainViewModel.MainWindow.TextWrap = TextWrapping.NoWrap;
+                MainViewModel.MainWindowModel.TextWrap = TextWrapping.NoWrap;
         }
     }
 }

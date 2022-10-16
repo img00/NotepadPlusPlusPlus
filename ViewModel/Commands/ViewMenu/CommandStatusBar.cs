@@ -6,10 +6,10 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.ViewMenu
     {
         public override void Execute(object? parameter)
         {
-            if (MainViewModel.MainWindow.StatusBar.Equals(Visibility.Collapsed))
-                MainViewModel.MainWindow.StatusBar = Visibility.Visible;
+            if (MainViewModel.MainWindowModel.StatusBar.Equals(Visibility.Collapsed))
+                MainViewModel.MainWindowModel.StatusBar = Visibility.Visible;
             else
-                MainViewModel.MainWindow.StatusBar = Visibility.Collapsed;
+                MainViewModel.MainWindowModel.StatusBar = Visibility.Collapsed;
         }
     }
 }

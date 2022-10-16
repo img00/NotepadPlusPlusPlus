@@ -7,9 +7,9 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.Edit
         public override void Execute(object? parameter)
         {
             DateTime now = DateTime.Now;
-            MainViewModel.MainWindow.SelectedText = $"{now:t} {now:d}";
-            MainViewModel.MainWindow.SelectionStart += MainViewModel.MainWindow.SelectionLength;
-            MainViewModel.MainWindow.SelectionLength = 0;
+            MainViewModel.CurrentWindowModel.SelectedText = $"{now:t} {now:d}";
+            MainViewModel.CurrentWindowModel.SelectionStart += MainViewModel.CurrentWindowModel.SelectionLength;
+            MainViewModel.CurrentWindowModel.SelectionLength = 0;
         }
     }
 }

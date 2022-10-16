@@ -9,7 +9,7 @@
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="{Binding MainWindow.Title}"
+        Title="{Binding MainWindowModel.Title}"
         Height="450" Width="800"
         MinWidth="265"
         ResizeMode="CanResizeWithGrip">
@@ -22,7 +22,7 @@
 
         <KeyBinding Command="{Binding EditCommands.CmdSearchBing}" Modifiers="Ctrl" Key="F"/>
         <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
-        <KeyBinding Command="{Binding EditCommands.CmdDate}" CommandParameter="{Binding ElementName=MainTextBox}" Key="F5"/>
+        <KeyBinding Command="{Binding EditCommands.CmdDate}" Key="F5"/>
 
         <KeyBinding Command="{Binding ViewCommands.CmdZoomIn}" Modifiers="Ctrl" Key="OemPlus"/>
         <KeyBinding Command="{Binding ViewCommands.CmdZoomIn}" Modifiers="Ctrl" Key="Add"/>
@@ -36,7 +36,7 @@
     </Window.InputBindings>
 
     <Grid>
-        <DockPanel Margin="1" FocusManager.FocusedElement="{Binding ElementName=MainTextBox}">
+        <DockPanel Margin="1" FocusManager.FocusedElement="{Binding ElementName=Content}">
             <Menu x:Name="MainMenu" DockPanel.Dock="Top" Background="White">
                 <Menu.Items>
                     <MenuItem Header="_Archivo">
@@ -56,7 +56,7 @@
                         <ex:ExtendedMenuItem Header="Cortar" InputGestureText="Ctrl+X" Command="ApplicationCommands.Cut"/>
                         <ex:ExtendedMenuItem Header="Copiar" InputGestureText="Ctrl+C" Command="ApplicationCommands.Copy"/>
                         <ex:ExtendedMenuItem Header="Pegar" InputGestureText="Ctrl+V" Command="ApplicationCommands.Paste"/>
-                        <MenuItem Header="Eliminar" InputGestureText="Delete" Command="EditingCommands.Delete"/>
+                        <ex:ExtendedMenuItem Header="Eliminar" InputGestureText="Delete" Command="EditingCommands.Delete"/>
                         <Separator/>
                         <ex:ExtendedMenuItem Header="Búsqueda con Bing..." InputGestureText="Ctrl+F" Command="{Binding EditCommands.CmdSearchBing}"/>
                         <ex:ExtendedMenuItem Header="Buscar..." InputGestureText="Ctrl+B" Command="" Background="Beige"/>
@@ -66,7 +66,7 @@
                         <MenuItem Header="Ir a..." InputGestureText="Ctrl+T" Command="" Background="Beige"/>
                         <Separator/>
                         <MenuItem Header="Seleccionar todo" InputGestureText="Ctrl+E" Command="ApplicationCommands.SelectAll"/>
-                        <MenuItem Header="Hora y fecha" InputGestureText="F5" Command="{Binding EditCommands.CmdDate}"  CommandParameter="{Binding ElementName=MainTextBox}"/>
+                        <MenuItem Header="Hora y fecha" InputGestureText="F5" Command="{Binding EditCommands.CmdDate}"/>
                     </MenuItem>
                     <MenuItem Header="F_ormato">
                         <MenuItem Header="Ajuste de línea" IsCheckable="True" Command="{Binding FormatCommands.CmdWrap}"/>
@@ -90,6 +90,9 @@
             </Menu>
 
 
+            <ContentControl x:Name="Content" Content="{Binding MainWindowModel.CurrentView}"/>
+
+            <!--
             <DockPanel x:Name="DockPanel" Background="#f0f0f0">
 
                 <Border x:Name="StatusBar" BorderThickness="0,1,0,0" BorderBrush="#e1e1e1" DockPanel.Dock="Bottom" Visibility="{Binding MainWindow.StatusBar}">
@@ -103,7 +106,7 @@
                             <TextBlock x:Name="LineColBottomPanel"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
-                                       Text="{Binding MainWindow.LineColFormatted}"/>
+                                       Text="{Binding NotepadWindow.LineColFormatted}"/>
                         </Border>
 
                         <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="50" Height="22" Padding="7,0,0,0">
@@ -133,10 +136,10 @@
 
                     </StackPanel>
                 </Border>
-                
+
 
                 <Border BorderBrush="#f1f1f1" BorderThickness="0, 2, 0, 1">
-                    
+
                     <ex:ExtendedTextBox x:Name="MainTextBox"
                              ScrollViewer.HorizontalScrollBarVisibility="Visible"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -144,14 +147,16 @@
                              AcceptsReturn="True"
                              AcceptsTab="True"
                              BorderThickness="0"
-                             Text="{Binding MainWindow.DisplayedText, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding NotepadWindow.Text, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="{Binding MainWindow.FontSizeWithZoom}"
                              TextWrapping="{Binding MainWindow.TextWrap}"
                              FontFamily="Consolas"
-                             ex:TextBoxHelper.SelectedText="{Binding MainWindow.SelectedText}"
-                             ex:TextBoxHelper.SelectionStart="{Binding MainWindow.SelectionStart}"
-                             ex:TextBoxHelper.SelectionLength="{Binding MainWindow.SelectionLength}"
-                             ex:TextBoxHelper.CaretIndex="{Binding MainWindow.CaretIndex}">
+                             ex:TextBoxHelper.SelectedText="{Binding NotepadWindow.SelectedText}"
+                             ex:TextBoxHelper.SelectionStart="{Binding NotepadWindow.SelectionStart}"
+                             ex:TextBoxHelper.SelectionLength="{Binding NotepadWindow.SelectionLength}"
+                             ex:TextBoxHelper.CaretIndex="{Binding NotepadWindow.CaretIndex}"
+                             ex:TextBoxHelper.Line="{Binding NotepadWindow.Line}"
+                             ex:TextBoxHelper.Column="{Binding NotepadWindow.Column}">
 
                         <TextBox.InputBindings>
                             <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
@@ -168,30 +173,10 @@
                         </i:Interaction.Triggers>
 
                     </ex:ExtendedTextBox>
-
-
-                    <!--
-                    <WindowsFormsHost DockPanel.Dock="Top">
-                        
-                        <wf:TextBox x:Name="MainTextBox"
-                        AcceptsReturn="True"
-                        AcceptsTab="True"
-                        Multiline="True"
-                        BorderStyle="None"
-                        ScrollBars="Both"
-                        WordWrap="False">
-
-
-
-                        </wf:TextBox>
-                    </WindowsFormsHost>-->
-
                 </Border>
-
-
-            </DockPanel>
+            </DockPanel>-->
+            
         </DockPanel>
-
     </Grid>
 
 </Window>

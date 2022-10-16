@@ -4,7 +4,7 @@
     {
         public override void Execute(object? parameter)
         {
-            MainViewModel.MainWindow.ZoomLevel = 1f;
+            MainViewModel.MainWindowModel.ZoomLevel = 1f;
         }
     }
 }

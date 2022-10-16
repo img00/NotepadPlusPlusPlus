@@ -6,11 +6,11 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.Edit
     {
         public override void Execute(object? parameter)
         {
-            string link = "https://www.google.com/search?q=" + MainViewModel.MainWindow.SelectedText;
+            string link = "https://www.google.com/search?q=" + MainViewModel.CurrentWindowModel.SelectedText;
             Process.Start(new ProcessStartInfo(link) { UseShellExecute = true });
         }
 
         public override bool CanExecute(object? parameter) =>
-            MainViewModel.MainWindow.SelectionLength > 0;
+            MainViewModel.CurrentWindowModel.SelectionLength > 0;
     }
 }

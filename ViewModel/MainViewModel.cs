@@ -1,4 +1,5 @@
 ﻿using NotepadPlusPlusPlus.Model;
+using NotepadPlusPlusPlus.Model.WindowModels;
 using NotepadPlusPlusPlus.ViewModel.Commands.Chat;
 using NotepadPlusPlusPlus.ViewModel.Commands.Edit;
 using NotepadPlusPlusPlus.ViewModel.Commands.File;
@@ -12,7 +13,6 @@ namespace NotepadPlusPlusPlus.ViewModel
 {
     public class MainViewModel : ICloseWindow
     {
-        public ChatViewModel ChatViewModel { get; }
         public FileMenuCommands FileCommands { get; } = new FileMenuCommands();
         public EditMenuCommands EditCommands { get; } = new EditMenuCommands();
         public FormatMenuCommands FormatCommands { get; } = new FormatMenuCommands();
@@ -22,23 +22,46 @@ namespace NotepadPlusPlusPlus.ViewModel
 
         public MainViewModel()
         {
-            ChatViewModel = new ChatViewModel(this);
-            MainWindow.Title = $"{Document.Name}: Bloc de notas";
+            MainWindowModel.Title = $"{Document.Name}: Bloc de notas";
             Document.PropertyChanged += (_, e) => DocumentChanged();
+
+            CurrentViewModel = App.NotepadViewModel;
+            CurrentWindowModel = NotepadWindowModel;
+            MainWindowModel.CurrentView = App.NotepadView;
         }
 
-        public MainWindowModel MainWindow { get; } = new MainWindowModel();
+        public Object CurrentViewModel { get; set; }
+
+        public MainWindowModel MainWindowModel { get; } = new MainWindowModel();
+        public NotepadWindowModel NotepadWindowModel { get; } = new NotepadWindowModel();
+        public ChatWindowModel ChatWindowModel { get; } = new ChatWindowModel();
+        public TextboxModel CurrentWindowModel { get; set; }
+        
+
         public DocumentModel Document { get; } = new DocumentModel();
+
+
         public void DocumentChanged()
         {
-            if (MainWindow.IsChatting) 
+            if (MainWindowModel.IsChatting) 
             { 
-                MainWindow.Title = "Chat: Bloc de notas";
+                MainWindowModel.Title = "Chat: Bloc de notas";
                 return;
             }
-            MainWindow.Title = (Document.Unsaved ? "*" : "")
+            MainWindowModel.Title = (Document.Unsaved ? "*" : "")
                              + Document.Name
                              + ": Bloc de notas";
+        }
+
+
+        public void IsChattingChanged()
+        {
+            if (CurrentWindowModel.Equals(NotepadWindowModel))
+                App.ChatViewModel.SwitchToChatView();
+            else
+                App.NotepadViewModel.SwitchToNotepadView();
+
+            DocumentChanged();
         }
 
 

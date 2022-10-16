@@ -4,8 +4,8 @@
     {
         public override void Execute(object? parameter)
         {
-            if (MainViewModel.MainWindow.ZoomLevel < MainViewModel.MainWindow.MaxZoomLevel)
-                MainViewModel.MainWindow.ZoomLevel += 0.1f;
+            if (MainViewModel.MainWindowModel.ZoomLevel < MainViewModel.MainWindowModel.MaxZoomLevel)
+                MainViewModel.MainWindowModel.ZoomLevel += 0.1f;
         }
     }
 }

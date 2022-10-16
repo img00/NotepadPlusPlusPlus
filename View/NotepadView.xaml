@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="NotepadPlusPlusPlus.View.NotepadView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NotepadPlusPlusPlus.View"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:ex="clr-namespace:NotepadPlusPlusPlus.View.Extensions"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <DockPanel x:Name="DockPanel" Background="#f0f0f0">
+
+        <Border x:Name="StatusBar" BorderThickness="0,1,0,0" BorderBrush="#e1e1e1" DockPanel.Dock="Bottom" Visibility="{Binding MainWindowModel.StatusBar}">
+            <StackPanel x:Name="BottomPanel"
+                                DockPanel.Dock="Bottom"
+                                Height="22"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+
+                <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="140" Height="22" Padding="7,0,0,0">
+                    <TextBlock x:Name="LineColBottomPanel"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding NotepadWindowModel.LineColFormatted}"/>
+                </Border>
+
+                <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="50" Height="22" Padding="7,0,0,0">
+                    <TextBlock x:Name="ZoomBottomPanel"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding MainWindowModel.ZoomLevelFormatted}"/>
+                </Border>
+
+                <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="120" Height="22" Padding="7,0,0,0">
+                    <TextBlock x:Name="CRLFBottomPanel"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Text="Windows (CRLF)"/>
+                </Border>
+
+                <Border x:Name="BorderEncoding" BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="120" Height="22" Padding="7,0,0,0">
+                    <TextBlock x:Name="EncodingBottomPanel"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Document.EncodingString}"/>
+
+                    <Border.InputBindings>
+                        <MouseBinding Command="{Binding ChatCommands.CmdSwitch}" Gesture="LeftDoubleClick"/>
+                    </Border.InputBindings>
+                </Border>
+
+            </StackPanel>
+        </Border>
+
+
+        <Border BorderBrush="#f1f1f1" BorderThickness="0, 2, 0, 1">
+
+            <ex:ExtendedTextBox x:Name="MainTextBox"
+                                Focusable="True"
+                             ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                             ScrollViewer.VerticalScrollBarVisibility="Visible"
+                             DockPanel.Dock="Top"
+                             AcceptsReturn="True"
+                             AcceptsTab="True"
+                             BorderThickness="0"
+                             Text="{Binding NotepadWindowModel.Text, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="{Binding MainWindowModel.FontSizeWithZoom}"
+                             TextWrapping="{Binding MainWindowModel.TextWrap}"
+                             FontFamily="Consolas"
+                             ex:TextBoxHelper.SelectedText="{Binding NotepadWindowModel.SelectedText}"
+                             ex:TextBoxHelper.SelectionStart="{Binding NotepadWindowModel.SelectionStart}"
+                             ex:TextBoxHelper.SelectionLength="{Binding NotepadWindowModel.SelectionLength}"
+                             ex:TextBoxHelper.CaretIndex="{Binding NotepadWindowModel.CaretIndex}"
+                             ex:TextBoxHelper.Line="{Binding NotepadWindowModel.Line}"
+                             ex:TextBoxHelper.Column="{Binding NotepadWindowModel.Column}">
+
+                <TextBox.InputBindings>
+                    <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
+                    <KeyBinding Command="ApplicationCommands.NotACommand" Modifiers="Ctrl" Key="A"/>
+                </TextBox.InputBindings>
+
+                <i:Interaction.Triggers>
+                    <!--
+                    Binding ChatViewModel.CmdKeyDownChat Change for static App.ChatViewModel
+                    <i:EventTrigger EventName="PreviewKeyDown">
+                        <i:InvokeCommandAction Command="{Binding ChatViewModel.CmdKeyDownChat}" PassEventArgsToCommand="True"/>
+                    </i:EventTrigger>
+                    -->
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding TextBoxChangedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </ex:ExtendedTextBox>
+
+
+            <!--
+                    <WindowsFormsHost DockPanel.Dock="Top">
+                        
+                        <wf:TextBox x:Name="MainTextBox"
+                        AcceptsReturn="True"
+                        AcceptsTab="True"
+                        Multiline="True"
+                        BorderStyle="None"
+                        ScrollBars="Both"
+                        WordWrap="False">
+
+
+
+                        </wf:TextBox>
+                    </WindowsFormsHost>-->
+
+        </Border>
+
+
+    </DockPanel>
+</UserControl>
