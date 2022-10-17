@@ -26,7 +26,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
             MainViewModel.Document.Encoding = System.Text.Encoding.UTF8;
             MainViewModel.Document.Unsaved = false;
 
-            MainViewModel.CurrentWindowModel.Text = "";
+            MainViewModel.CurrentModel.Text = "";
         }
     }
 

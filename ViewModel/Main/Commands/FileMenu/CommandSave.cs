@@ -1,4 +1,5 @@
 ﻿using NotepadPlusPlusPlus.Model;
+using NotepadPlusPlusPlus.ViewModel.Main;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands.File
 {
@@ -9,11 +10,12 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
         public bool Save()
         {
             DocumentModel document = MainViewModel.Document;
+            MainViewModel.SwitchView(false);
 
             if (MainViewModel.Document.Path.Equals(""))
                 return CommandSaveAs.SaveAs();
 
-            Save(document.Name, document.Path, MainViewModel.CurrentWindowModel.Text);
+            Save(document.Name, document.Path, MainViewModel.CurrentModel.Text);
             return true;
         }
 

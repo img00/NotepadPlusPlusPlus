@@ -10,7 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel x:Name="DockPanel" Background="#f0f0f0">
 
-        <Border x:Name="StatusBar" BorderThickness="0,1,0,0" BorderBrush="#e1e1e1" DockPanel.Dock="Bottom" Visibility="{Binding MainWindowModel.StatusBar}">
+        <Border x:Name="StatusBar" BorderThickness="0,1,0,0" BorderBrush="#e1e1e1" DockPanel.Dock="Bottom" Visibility="{Binding WindowModel.StatusBar}">
             <StackPanel x:Name="BottomPanel"
                                 DockPanel.Dock="Bottom"
                                 Height="22"
@@ -21,14 +21,14 @@
                     <TextBlock x:Name="LineColBottomPanel"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
-                                       Text="{Binding ChatWindowModel.CharacterCountFormatted}"/>
+                                       Text="{Binding ChatModel.CharacterCountFormatted}"/>
                 </Border>
 
                 <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="50" Height="22" Padding="7,0,0,0">
                     <TextBlock x:Name="ZoomBottomPanel"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
-                                       Text="{Binding MainWindowModel.ZoomLevelFormatted}"/>
+                                       Text="{Binding WindowModel.ZoomLevelFormatted}"/>
                 </Border>
 
                 <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="120" Height="22" Padding="7,0,0,0">
@@ -61,17 +61,17 @@
                              AcceptsReturn="True"
                              AcceptsTab="True"
                              BorderThickness="0"
-                             Text="{Binding ChatWindowModel.Text, UpdateSourceTrigger=PropertyChanged}"
-                             FontSize="{Binding MainWindowModel.FontSizeWithZoom}"
-                             TextWrapping="{Binding MainWindowModel.TextWrap}"
+                             Text="{Binding ChatModel.Text, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="{Binding WindowModel.FontSizeWithZoom}"
+                             TextWrapping="{Binding WindowModel.TextWrap}"
                              FontFamily="Consolas"
                              CatchEditingCommands="True"
-                             ex:TextBoxHelper.SelectedText="{Binding ChatWindowModel.SelectedText}"
-                             ex:TextBoxHelper.SelectionStart="{Binding ChatWindowModel.SelectionStart}"
-                             ex:TextBoxHelper.SelectionLength="{Binding ChatWindowModel.SelectionLength}"
-                             ex:TextBoxHelper.CaretIndex="{Binding ChatWindowModel.CaretIndex}"
-                             ex:TextBoxHelper.Line="{Binding ChatWindowModel.Line}"
-                             ex:TextBoxHelper.Column="{Binding ChatWindowModel.Column}">
+                             ex:TextBoxHelper.SelectedText="{Binding ChatModel.SelectedText}"
+                             ex:TextBoxHelper.SelectionStart="{Binding ChatModel.SelectionStart}"
+                             ex:TextBoxHelper.SelectionLength="{Binding ChatModel.SelectionLength}"
+                             ex:TextBoxHelper.CaretIndex="{Binding ChatModel.CaretIndex}"
+                             ex:TextBoxHelper.Line="{Binding ChatModel.Line}"
+                             ex:TextBoxHelper.Column="{Binding ChatModel.Column}">
 
                 <TextBox.InputBindings>
                     <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
@@ -80,11 +80,11 @@
 
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewKeyDown">
-                        <i:InvokeCommandAction Command="{Binding CurrentViewModel.CmdKeyDownChat}" PassEventArgsToCommand="True"/>
+                        <i:InvokeCommandAction Command="{Binding ChatCommands.CmdKeyDown}" PassEventArgsToCommand="True"/>
                     </i:EventTrigger>
 
                     <i:EventTrigger EventName="EditingCommandTriggered">
-                        <i:InvokeCommandAction Command="{Binding CurrentViewModel.CmdEditingCommandTriggered}" PassEventArgsToCommand="True"/>
+                        <i:InvokeCommandAction Command="{Binding ChatCommands.CmdCutPasteDelete}" PassEventArgsToCommand="True"/>
                     </i:EventTrigger>
 
                     <i:EventTrigger EventName="TextChanged">

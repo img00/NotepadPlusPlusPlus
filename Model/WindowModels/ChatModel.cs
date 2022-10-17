@@ -1,15 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.MonthCalendar;
-
+﻿
 namespace NotepadPlusPlusPlus.Model.WindowModels
 {
-    public class ChatWindowModel : TextboxModel
+    public class ChatModel : TextboxModel
     {
         private int _maxMessageLength = 128;
+
+        private string? _username;
+
+        public string? Username
+        {
+            get => _username;
+            set
+            {
+                _username = value; 
+                OnPropertyChanged();
+            }
+        }
+
+
+        private string _title = "Chat";
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         private string? _messagesArea = "<Ismael> Hola!\n<Macarena> Cállate pedazo de gilipollas o te corto las piernas.\n\n";
 		public string MessagesArea

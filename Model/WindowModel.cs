@@ -4,10 +4,10 @@ using System.Windows.Controls;
 
 namespace NotepadPlusPlusPlus.Model
 {
-    public class MainWindowModel : ObservableObject
+    public class WindowModel : ObservableObject
     {
 
-        public MainWindowModel()
+        public WindowModel()
         {
             FontSize = 14;
             ZoomLevel = 1;

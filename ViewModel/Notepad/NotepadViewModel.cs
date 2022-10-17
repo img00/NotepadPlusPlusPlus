@@ -1,6 +1,7 @@
 ﻿using NotepadPlusPlusPlus.Model.WindowModels;
+using NotepadPlusPlusPlus.ViewModel.Main;
 
-namespace NotepadPlusPlusPlus.ViewModel
+namespace NotepadPlusPlusPlus.ViewModel.Notepad
 {
     public class NotepadViewModel
     {
@@ -12,9 +13,9 @@ namespace NotepadPlusPlusPlus.ViewModel
             App.NotepadView.IsEnabled = true;
 
             _mainViewModel.CurrentViewModel = App.NotepadViewModel;
-            _mainViewModel.MainWindowModel.CurrentView = App.NotepadView;
-            _mainViewModel.CurrentWindowModel = _mainViewModel.NotepadWindowModel;
-            _mainViewModel.MainWindowModel.IsChatting = false;
+            _mainViewModel.WindowModel.CurrentView = App.NotepadView;
+            _mainViewModel.CurrentModel = _mainViewModel.NotepadModel;
+            _mainViewModel.WindowModel.IsChatting = false;
         }
     }
 }

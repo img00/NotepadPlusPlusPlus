@@ -7,6 +7,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.FileMenu
     {
         public override void Execute(object? parameter)
         {
+            MainViewModel.SwitchView(false);
             PrintDialog printDialog = new PrintDialog();
             bool? printed = printDialog.ShowDialog();
 

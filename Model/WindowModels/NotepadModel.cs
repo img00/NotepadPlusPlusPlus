@@ -1,6 +1,6 @@
 ﻿namespace NotepadPlusPlusPlus.Model.WindowModels
 {
-    public class NotepadWindowModel : TextboxModel
+    public class NotepadModel : TextboxModel
     {
 
     }

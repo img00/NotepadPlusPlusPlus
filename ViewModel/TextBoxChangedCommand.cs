@@ -6,7 +6,7 @@ namespace NotepadPlusPlusPlus.ViewModel
     {
         public override void Execute(object? parameter)
         {
-            bool unsaved = !MainViewModel.NotepadWindowModel.Text.Equals(MainViewModel.Document.Text);
+            bool unsaved = !MainViewModel.NotepadModel.Text.Equals(MainViewModel.Document.Text);
 
             if (MainViewModel.Document.Unsaved == unsaved) return;
 

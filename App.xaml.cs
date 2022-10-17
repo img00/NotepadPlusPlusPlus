@@ -1,6 +1,8 @@
 ﻿using NotepadPlusPlusPlus.Model.WindowModels;
 using NotepadPlusPlusPlus.View;
-using NotepadPlusPlusPlus.ViewModel;
+using NotepadPlusPlusPlus.ViewModel.Chat;
+using NotepadPlusPlusPlus.ViewModel.Main;
+using NotepadPlusPlusPlus.ViewModel.Notepad;
 using System.Windows;
 
 /* 
@@ -17,7 +19,7 @@ namespace NotepadPlusPlusPlus
 
         public static MainViewModel MainViewModel = new();
         public static NotepadViewModel NotepadViewModel = new();
-        public static ChatViewModel ChatViewModel = new();
+        public static ChatViewModel ChatViewModel = new(MainViewModel);
 
         protected override void OnStartup(StartupEventArgs e)
         {

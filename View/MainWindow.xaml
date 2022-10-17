@@ -9,7 +9,7 @@
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="{Binding MainWindowModel.Title}"
+        Title="{Binding WindowModel.Title}"
         Height="450" Width="800"
         MinWidth="265"
         ResizeMode="CanResizeWithGrip">
@@ -90,91 +90,7 @@
             </Menu>
 
 
-            <ContentControl x:Name="Content" Content="{Binding MainWindowModel.CurrentView}"/>
-
-            <!--
-            <DockPanel x:Name="DockPanel" Background="#f0f0f0">
-
-                <Border x:Name="StatusBar" BorderThickness="0,1,0,0" BorderBrush="#e1e1e1" DockPanel.Dock="Bottom" Visibility="{Binding MainWindow.StatusBar}">
-                    <StackPanel x:Name="BottomPanel"
-                                DockPanel.Dock="Bottom"
-                                Height="22"
-                                HorizontalAlignment="Right"
-                                Orientation="Horizontal">
-
-                        <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="140" Height="22" Padding="7,0,0,0">
-                            <TextBlock x:Name="LineColBottomPanel"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Text="{Binding NotepadWindow.LineColFormatted}"/>
-                        </Border>
-
-                        <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="50" Height="22" Padding="7,0,0,0">
-                            <TextBlock x:Name="ZoomBottomPanel"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Text="{Binding MainWindow.ZoomLevelFormatted}"/>
-                        </Border>
-
-                        <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="120" Height="22" Padding="7,0,0,0">
-                            <TextBlock x:Name="CRLFBottomPanel"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Text="Windows (CRLF)"/>
-                        </Border>
-
-                        <Border x:Name="BorderEncoding" BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="120" Height="22" Padding="7,0,0,0">
-                            <TextBlock x:Name="EncodingBottomPanel"
-                                       HorizontalAlignment="Stretch"
-                                       VerticalAlignment="Center"
-                                       Text="{Binding Document.EncodingString}"/>
-
-                            <Border.InputBindings>
-                                <MouseBinding Command="{Binding ChatCommands.CmdSwitch}" Gesture="LeftDoubleClick"/>
-                            </Border.InputBindings>
-                        </Border>
-
-                    </StackPanel>
-                </Border>
-
-
-                <Border BorderBrush="#f1f1f1" BorderThickness="0, 2, 0, 1">
-
-                    <ex:ExtendedTextBox x:Name="MainTextBox"
-                             ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                             ScrollViewer.VerticalScrollBarVisibility="Visible"
-                             DockPanel.Dock="Top"
-                             AcceptsReturn="True"
-                             AcceptsTab="True"
-                             BorderThickness="0"
-                             Text="{Binding NotepadWindow.Text, UpdateSourceTrigger=PropertyChanged}"
-                             FontSize="{Binding MainWindow.FontSizeWithZoom}"
-                             TextWrapping="{Binding MainWindow.TextWrap}"
-                             FontFamily="Consolas"
-                             ex:TextBoxHelper.SelectedText="{Binding NotepadWindow.SelectedText}"
-                             ex:TextBoxHelper.SelectionStart="{Binding NotepadWindow.SelectionStart}"
-                             ex:TextBoxHelper.SelectionLength="{Binding NotepadWindow.SelectionLength}"
-                             ex:TextBoxHelper.CaretIndex="{Binding NotepadWindow.CaretIndex}"
-                             ex:TextBoxHelper.Line="{Binding NotepadWindow.Line}"
-                             ex:TextBoxHelper.Column="{Binding NotepadWindow.Column}">
-
-                        <TextBox.InputBindings>
-                            <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
-                            <KeyBinding Command="ApplicationCommands.NotACommand" Modifiers="Ctrl" Key="A"/>
-                        </TextBox.InputBindings>
-
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewKeyDown">
-                                <i:InvokeCommandAction Command="{Binding ChatViewModel.CmdKeyDownChat}" PassEventArgsToCommand="True"/>
-                            </i:EventTrigger>
-                            <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding TextBoxChangedCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-
-                    </ex:ExtendedTextBox>
-                </Border>
-            </DockPanel>-->
+            <ContentControl x:Name="Content" Content="{Binding WindowModel.CurrentView}"/>
             
         </DockPanel>
     </Grid>

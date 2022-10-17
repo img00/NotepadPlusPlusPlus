@@ -11,7 +11,7 @@
 
     <DockPanel x:Name="DockPanel" Background="#f0f0f0">
 
-        <Border x:Name="StatusBar" BorderThickness="0,1,0,0" BorderBrush="#e1e1e1" DockPanel.Dock="Bottom" Visibility="{Binding MainWindowModel.StatusBar}">
+        <Border x:Name="StatusBar" BorderThickness="0,1,0,0" BorderBrush="#e1e1e1" DockPanel.Dock="Bottom" Visibility="{Binding WindowModel.StatusBar}">
             <StackPanel x:Name="BottomPanel"
                                 DockPanel.Dock="Bottom"
                                 Height="22"
@@ -22,14 +22,14 @@
                     <TextBlock x:Name="LineColBottomPanel"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
-                                       Text="{Binding NotepadWindowModel.LineColFormatted}"/>
+                                       Text="{Binding NotepadModel.LineColFormatted}"/>
                 </Border>
 
                 <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="50" Height="22" Padding="7,0,0,0">
                     <TextBlock x:Name="ZoomBottomPanel"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
-                                       Text="{Binding MainWindowModel.ZoomLevelFormatted}"/>
+                                       Text="{Binding WindowModel.ZoomLevelFormatted}"/>
                 </Border>
 
                 <Border BorderThickness="1,0,0,0" BorderBrush="#e1e1e1" Width="120" Height="22" Padding="7,0,0,0">
@@ -64,16 +64,16 @@
                              AcceptsReturn="True"
                              AcceptsTab="True"
                              BorderThickness="0"
-                             Text="{Binding NotepadWindowModel.Text, UpdateSourceTrigger=PropertyChanged}"
-                             FontSize="{Binding MainWindowModel.FontSizeWithZoom}"
-                             TextWrapping="{Binding MainWindowModel.TextWrap}"
+                             Text="{Binding NotepadModel.Text, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="{Binding WindowModel.FontSizeWithZoom}"
+                             TextWrapping="{Binding WindowModel.TextWrap}"
                              FontFamily="Consolas"
-                             ex:TextBoxHelper.SelectedText="{Binding NotepadWindowModel.SelectedText}"
-                             ex:TextBoxHelper.SelectionStart="{Binding NotepadWindowModel.SelectionStart}"
-                             ex:TextBoxHelper.SelectionLength="{Binding NotepadWindowModel.SelectionLength}"
-                             ex:TextBoxHelper.CaretIndex="{Binding NotepadWindowModel.CaretIndex}"
-                             ex:TextBoxHelper.Line="{Binding NotepadWindowModel.Line}"
-                             ex:TextBoxHelper.Column="{Binding NotepadWindowModel.Column}">
+                             ex:TextBoxHelper.SelectedText="{Binding NotepadModel.SelectedText}"
+                             ex:TextBoxHelper.SelectionStart="{Binding NotepadModel.SelectionStart}"
+                             ex:TextBoxHelper.SelectionLength="{Binding NotepadModel.SelectionLength}"
+                             ex:TextBoxHelper.CaretIndex="{Binding NotepadModel.CaretIndex}"
+                             ex:TextBoxHelper.Line="{Binding NotepadModel.Line}"
+                             ex:TextBoxHelper.Column="{Binding NotepadModel.Column}">
 
                 <TextBox.InputBindings>
                     <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>

@@ -24,6 +24,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
                 }
             }
 
+            MainViewModel.SwitchView(false);
             Open();
         }
 
@@ -39,7 +40,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
             MainViewModel.Document.Path = openFileDialog.FileName;
             String newText = System.IO.File.ReadAllText(openFileDialog.FileName);
             MainViewModel.Document.Text = newText;
-            MainViewModel.CurrentWindowModel.Text = newText;
+            MainViewModel.CurrentModel.Text = newText;
             MainViewModel.Document.Encoding = GetDocumentEncoding(openFileDialog.FileName);
             MainViewModel.Document.Unsaved = false;
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using NotepadPlusPlusPlus.ViewModel.Main;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands.File
 {
@@ -19,7 +20,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
 
             if (saveFileDialog.ShowDialog() == false) return false;
 
-            CommandSave.Save(saveFileDialog.SafeFileName, saveFileDialog.FileName, mainViewModel.CurrentWindowModel.Text);
+            CommandSave.Save(saveFileDialog.SafeFileName, saveFileDialog.FileName, mainViewModel.CurrentModel.Text);
             return true;
         }
 

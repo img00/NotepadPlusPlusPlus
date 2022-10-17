@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using NotepadPlusPlusPlus.ViewModel.Main;
 
 namespace NotepadPlusPlusPlus.ViewModel.Commands
 {

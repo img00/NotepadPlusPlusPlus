@@ -1,4 +1,4 @@
-﻿using NotepadPlusPlusPlus.ViewModel;
+﻿using NotepadPlusPlusPlus.ViewModel.Main;
 using System.Windows;
 
 // TODO: Implement custom right click

@@ -1,67 +1,80 @@
 ﻿using NotepadPlusPlusPlus.Model;
 using NotepadPlusPlusPlus.Model.WindowModels;
+using NotepadPlusPlusPlus.ViewModel.Chat;
 using NotepadPlusPlusPlus.ViewModel.Commands.Chat;
 using NotepadPlusPlusPlus.ViewModel.Commands.Edit;
 using NotepadPlusPlusPlus.ViewModel.Commands.File;
 using NotepadPlusPlusPlus.ViewModel.Commands.Format;
 using NotepadPlusPlusPlus.ViewModel.Commands.HelpMenu;
 using NotepadPlusPlusPlus.ViewModel.Commands.ViewMenu;
+using NotepadPlusPlusPlus.ViewModel.Notepad;
 using System;
 using System.Windows.Input;
 
-namespace NotepadPlusPlusPlus.ViewModel
+namespace NotepadPlusPlusPlus.ViewModel.Main
 {
     public class MainViewModel : ICloseWindow
     {
+        #region Command definitions
         public FileMenuCommands FileCommands { get; } = new FileMenuCommands();
         public EditMenuCommands EditCommands { get; } = new EditMenuCommands();
         public FormatMenuCommands FormatCommands { get; } = new FormatMenuCommands();
         public ViewMenuCommands ViewCommands { get; } = new ViewMenuCommands();
         public HelpMenuCommands HelpCommands { get; } = new HelpMenuCommands();
         public ChatCommands ChatCommands { get; } = new ChatCommands();
+        #endregion
 
         public MainViewModel()
         {
-            MainWindowModel.Title = $"{Document.Name}: Bloc de notas";
+            WindowModel.Title = $"{Document.Name}: Bloc de notas";
             Document.PropertyChanged += (_, e) => DocumentChanged();
 
-            CurrentViewModel = App.NotepadViewModel;
-            CurrentWindowModel = NotepadWindowModel;
-            MainWindowModel.CurrentView = App.NotepadView;
+            CurrentViewModel = NotepadViewModel;
+            CurrentModel = NotepadModel;
+            WindowModel.CurrentView = App.NotepadView;
         }
 
-        public Object CurrentViewModel { get; set; }
+        #region Model definitions
+        public TextboxModel CurrentModel { get; set; }
 
-        public MainWindowModel MainWindowModel { get; } = new MainWindowModel();
-        public NotepadWindowModel NotepadWindowModel { get; } = new NotepadWindowModel();
-        public ChatWindowModel ChatWindowModel { get; } = new ChatWindowModel();
-        public TextboxModel CurrentWindowModel { get; set; }
-        
-
+        public WindowModel WindowModel { get; } = new WindowModel();
+        public NotepadModel NotepadModel { get; } = new NotepadModel();
+        public ChatModel ChatModel { get; } = new ChatModel();
         public DocumentModel Document { get; } = new DocumentModel();
+        #endregion
+
+
+        #region ViewModel definitions
+        public object CurrentViewModel { get; set; }
+        public NotepadViewModel NotepadViewModel { get; set; } = App.NotepadViewModel;
+        public ChatViewModel ChatViewModel { get; set; } = App.ChatViewModel;
+        #endregion
 
 
         public void DocumentChanged()
         {
-            if (MainWindowModel.IsChatting) 
-            { 
-                MainWindowModel.Title = "Chat: Bloc de notas";
-                return;
-            }
-            MainWindowModel.Title = (Document.Unsaved ? "*" : "")
-                             + Document.Name
-                             + ": Bloc de notas";
+            UpdateWindowTitle();
         }
 
-
-        public void IsChattingChanged()
+        private void UpdateWindowTitle()
         {
-            if (CurrentWindowModel.Equals(NotepadWindowModel))
+            if (WindowModel.IsChatting)
+                WindowModel.Title = $"{ChatModel.Title}: Bloc de notas";
+            else
+                WindowModel.Title = (Document.Unsaved ? "*" : "")
+                                 + Document.Name
+                                 + ": Bloc de notas";
+        }
+
+        public void SwitchView(bool chat)
+        {
+            if (chat)
                 App.ChatViewModel.SwitchToChatView();
             else
                 App.NotepadViewModel.SwitchToNotepadView();
 
-            DocumentChanged();
+
+            UpdateWindowTitle();
         }
 
 
@@ -80,22 +93,4 @@ namespace NotepadPlusPlusPlus.ViewModel
         Action? Close { get; set; }
         bool CanClose();
     }
-
-
-
-
-
-    // TEST: This breaks MVVM, so it probably shouldn't be used. Instead, create a helper for textbox to be able to bind selection
-    /*
-    public class TextBoxSelectionChangedCommand : CommandBase
-    {
-        public override void Execute(object? parameter)
-        {
-            if (parameter is RoutedEventArgs re && re.Source is TextBox tb)
-            {
-                if (tb.SelectionStart != 10)
-                    tb.SelectionStart = 10;
-            }
-        }
-    }*/
 }
