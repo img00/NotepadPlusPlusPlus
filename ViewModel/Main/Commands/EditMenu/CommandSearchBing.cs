@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.Edit
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.EditMenu
 {
     public class CommandSearchBing : CommandBase
     {

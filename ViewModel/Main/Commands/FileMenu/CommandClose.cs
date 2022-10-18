@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.File
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.FileMenu
 {
     public class CommandClose : CommandBase
     {

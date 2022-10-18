@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
-using NotepadPlusPlusPlus.ViewModel.Main;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands
 {
     public abstract class CommandBase : ICommand
     {

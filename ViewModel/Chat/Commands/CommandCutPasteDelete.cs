@@ -1,6 +1,6 @@
 ﻿using NotepadPlusPlusPlus.Model.WindowModels;
-using NotepadPlusPlusPlus.ViewModel.Commands;
 using NotepadPlusPlusPlus.ViewModel.Main;
+using NotepadPlusPlusPlus.ViewModel.Main.Commands;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -31,31 +31,43 @@ namespace NotepadPlusPlusPlus.ViewModel.Chat.Commands
 
             if (e.Command.Equals(ApplicationCommands.Cut))
             {
-                Clipboard.SetText(_chatModel.SelectedText);
-                _chatModel.SelectedText = string.Empty;
+                Cut();
             }
             else if (e.Command.Equals(ApplicationCommands.Paste))
             {
-                _chatModel.SelectedText = Clipboard.GetText();
-                _chatModel.SelectionStart += _chatModel.SelectionLength;
-                _chatModel.SelectionLength = 0;
+                Paste();
             }
             else if (e.Command.Equals(EditingCommands.Delete))
             {
-                if (_chatModel.SelectionLength > 0)
-                {
-                    _chatModel.SelectedText = string.Empty;
-                }
-                else
-                {
-                    _chatModel.SelectionLength += 1;
-                    _chatModel.SelectedText = string.Empty;
-                    _chatModel.SelectionLength = 0;
-                }
-
+                Delete();
             }
 
             e.Handled = true;
+        }
+
+        private void Cut()
+        {
+            Clipboard.SetText(_chatModel.SelectedText);
+            _chatModel.SelectedText = string.Empty;
+        }
+
+        private void Paste()
+        {
+            _chatModel.SelectedText = Clipboard.GetText();
+            _chatModel.SelectionStart += _chatModel.SelectionLength;
+            _chatModel.SelectionLength = 0;
+        }
+
+        private void Delete()
+        {
+            if (_chatModel.SelectionLength > 0)
+                _chatModel.SelectedText = string.Empty;
+            else
+            {
+                _chatModel.SelectionLength += 1;
+                _chatModel.SelectedText = string.Empty;
+                _chatModel.SelectionLength = 0;
+            }
         }
 
         public override bool CanExecute(object? parameter) => MainViewModel.WindowModel.IsChatting;

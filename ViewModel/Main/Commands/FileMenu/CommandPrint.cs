@@ -1,15 +1,15 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.FileMenu
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.FileMenu
 {
     public class CommandPrint : CommandBase
     {
         public override void Execute(object? parameter)
         {
             MainViewModel.SwitchView(false);
-            PrintDialog printDialog = new PrintDialog();
-            bool? printed = printDialog.ShowDialog();
+
+            bool? printed = new PrintDialog().ShowDialog();
 
             if (printed != true) return;
 

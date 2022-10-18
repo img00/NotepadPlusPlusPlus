@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.HelpMenu
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.HelpMenu
 {
     public class CommandFeedback : CommandBase
     {

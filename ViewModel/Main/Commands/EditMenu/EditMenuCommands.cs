@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.Edit
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.EditMenu
 {
     public class EditMenuCommands
     {

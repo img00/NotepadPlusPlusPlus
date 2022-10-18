@@ -1,10 +1,9 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.IO;
 using System.Text;
 using System.Windows;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.File
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.FileMenu
 {
     public class CommandOpen : CommandBase
     {
@@ -38,7 +37,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
 
             MainViewModel.Document.Name = openFileDialog.SafeFileName;
             MainViewModel.Document.Path = openFileDialog.FileName;
-            String newText = System.IO.File.ReadAllText(openFileDialog.FileName);
+            string newText = File.ReadAllText(openFileDialog.FileName);
             MainViewModel.Document.Text = newText;
             MainViewModel.CurrentModel.Text = newText;
             MainViewModel.Document.Encoding = GetDocumentEncoding(openFileDialog.FileName);
@@ -54,9 +53,6 @@ namespace NotepadPlusPlusPlus.ViewModel.Commands.File
                 file.Read(bom, 0, 4);
             }
 
-#pragma warning disable SYSLIB0001 // Type or member is obsolete
-            if (bom[0] == 0x2b && bom[1] == 0x2f && bom[2] == 0x76) return Encoding.UTF7;
-#pragma warning restore SYSLIB0001 // Type or member is obsolete
             if (bom[0] == 0xef && bom[1] == 0xbb && bom[2] == 0xbf) return Encoding.UTF8;
             if (bom[0] == 0xff && bom[1] == 0xfe && bom[2] == 0 && bom[3] == 0) return Encoding.UTF32;
             if (bom[0] == 0xff && bom[1] == 0xfe) return Encoding.Unicode;

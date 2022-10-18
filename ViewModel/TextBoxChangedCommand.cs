@@ -1,4 +1,4 @@
-﻿using NotepadPlusPlusPlus.ViewModel.Commands;
+﻿using NotepadPlusPlusPlus.ViewModel.Main.Commands;
 
 namespace NotepadPlusPlusPlus.ViewModel
 {

@@ -1,6 +1,6 @@
 ﻿using NotepadPlusPlusPlus.Model.WindowModels;
-using NotepadPlusPlusPlus.ViewModel.Commands;
 using NotepadPlusPlusPlus.ViewModel.Main;
+using NotepadPlusPlusPlus.ViewModel.Main.Commands;
 using System.Linq;
 using System.Windows.Input;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.Edit
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.EditMenu
 {
     internal class CommandDate : CommandBase
     {

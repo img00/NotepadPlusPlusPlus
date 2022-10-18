@@ -1,4 +1,4 @@
-﻿namespace NotepadPlusPlusPlus.ViewModel.Commands.ViewMenu
+﻿namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.ViewMenu
 {
     public class CommandZoomIn : CommandBase
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NotepadPlusPlusPlus.Model.WindowModels
+﻿namespace NotepadPlusPlusPlus.Model.WindowModels
 {
     public abstract class TextboxModel : ObservableObject
     {
@@ -78,7 +76,7 @@ namespace NotepadPlusPlusPlus.Model.WindowModels
         {
             get => _column;
             set
-            { 
+            {
                 _column = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(LineColFormatted));

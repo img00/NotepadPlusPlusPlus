@@ -1,7 +1,6 @@
-﻿using NotepadPlusPlusPlus.ViewModel.Commands.FileMenu;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.File
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.FileMenu
 {
     public class FileMenuCommands
     {

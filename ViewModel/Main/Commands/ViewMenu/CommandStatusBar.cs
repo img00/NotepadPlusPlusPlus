@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.ViewMenu
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.ViewMenu
 {
     public class CommandStatusBar : CommandBase
     {

@@ -1,5 +1,4 @@
-﻿using NotepadPlusPlusPlus.Model.WindowModels;
-using NotepadPlusPlusPlus.View;
+﻿using NotepadPlusPlusPlus.View;
 using NotepadPlusPlusPlus.ViewModel.Chat;
 using NotepadPlusPlusPlus.ViewModel.Main;
 using NotepadPlusPlusPlus.ViewModel.Notepad;

@@ -1,15 +1,37 @@
 ﻿using NotepadPlusPlusPlus.ViewModel.Main;
+using System;
 
 namespace NotepadPlusPlusPlus.ViewModel.Chat
 {
     public class ChatViewModel
     {
         protected readonly MainViewModel _mainViewModel;
-        public ChatState ChatState { get; set; }
+        public ChatMessageSentActions ChatMessageSentActions { get; set; }
+
+        public event EventHandler ChatStateChanged;
+        private ChatState _chatState;
+        public ChatState ChatState
+        {
+            get => _chatState;
+            set
+            {
+                _chatState = value;
+                ChatStateChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         public ChatViewModel(MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
+            ChatMessageSentActions = new ChatMessageSentActions(_mainViewModel);
+            ChatStateChanged += OnChatStateChanged;
+            ChatState = ChatState.WaitingRegisterLogin;
+            
+        }
+
+        private void OnChatStateChanged(object? sender, EventArgs e)
+        {
+            _mainViewModel.ChatModel.NotificationsArea = ChatState.NotificationMessage;
         }
 
         public void SwitchToChatView()
@@ -21,11 +43,6 @@ namespace NotepadPlusPlusPlus.ViewModel.Chat
             _mainViewModel.WindowModel.CurrentView = App.ChatView;
             _mainViewModel.CurrentModel = _mainViewModel.ChatModel;
             _mainViewModel.WindowModel.IsChatting = true;
-
-            if (_mainViewModel.ChatModel.Username == null)
-            {
-
-            }
         }
 
         public static void MoveCursorChatArea()
@@ -34,12 +51,5 @@ namespace NotepadPlusPlusPlus.ViewModel.Chat
             App.MainViewModel.CurrentModel.SelectionLength = 0;
         }
 
-    }
-
-    public enum ChatState
-    {
-        WaitingRegisterLogin, RegisterWaitingUsername,
-        RegisterWaitingPassword, RegisterWaitingPasswordConfirmation,
-        LoginWaitingUsername, LoginWaitingPassword, Chatting
     }
 }

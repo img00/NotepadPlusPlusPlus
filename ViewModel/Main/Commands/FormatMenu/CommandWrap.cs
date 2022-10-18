@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.Format
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.FormatMenu
 {
     internal class CommandWrap : CommandBase
     {

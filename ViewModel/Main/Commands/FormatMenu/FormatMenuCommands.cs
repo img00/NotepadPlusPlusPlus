@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.Format
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.FormatMenu
 {
     public class FormatMenuCommands
     {

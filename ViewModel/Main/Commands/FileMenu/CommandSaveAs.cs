@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
-using NotepadPlusPlusPlus.ViewModel.Main;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.File
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.FileMenu
 {
     public class CommandSaveAs : CommandBase
     {

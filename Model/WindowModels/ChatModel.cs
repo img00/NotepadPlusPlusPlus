@@ -12,7 +12,7 @@ namespace NotepadPlusPlusPlus.Model.WindowModels
             get => _username;
             set
             {
-                _username = value; 
+                _username = value;
                 OnPropertyChanged();
             }
         }
@@ -31,24 +31,24 @@ namespace NotepadPlusPlusPlus.Model.WindowModels
 
 
         private string? _messagesArea = "<Ismael> Hola!\n<Macarena> Cállate pedazo de gilipollas o te corto las piernas.\n\n";
-		public string MessagesArea
-		{
-			get => _messagesArea ?? string.Empty;
-			set
-			{
-				_messagesArea = value;
-				OnPropertyChanged();
+        public string MessagesArea
+        {
+            get => _messagesArea ?? string.Empty;
+            set
+            {
+                _messagesArea = value;
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(Text));
             }
-		}
+        }
 
-        private string? _notificationsArea = "--> Notificación!\n";
+        private string? _notificationsArea = "--> Notificación!";
         public string NotificationsArea
         {
             get => _notificationsArea ?? string.Empty;
             set
             {
-                _notificationsArea = value;
+                _notificationsArea = value + "\n\r";
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(Text));
             }
@@ -64,8 +64,8 @@ namespace NotepadPlusPlusPlus.Model.WindowModels
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(Text));
             }
-        }        
-        
+        }
+
         private string? _chatArea;
         public string ChatArea
         {

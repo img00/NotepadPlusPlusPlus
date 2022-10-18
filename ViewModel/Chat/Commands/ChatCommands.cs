@@ -1,7 +1,6 @@
-﻿using NotepadPlusPlusPlus.ViewModel.Chat.Commands;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.Chat
+namespace NotepadPlusPlusPlus.ViewModel.Chat.Commands
 {
     public class ChatCommands
     {

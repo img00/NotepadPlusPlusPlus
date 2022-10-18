@@ -1,12 +1,12 @@
 ﻿using NotepadPlusPlusPlus.Model;
 using NotepadPlusPlusPlus.Model.WindowModels;
 using NotepadPlusPlusPlus.ViewModel.Chat;
-using NotepadPlusPlusPlus.ViewModel.Commands.Chat;
-using NotepadPlusPlusPlus.ViewModel.Commands.Edit;
-using NotepadPlusPlusPlus.ViewModel.Commands.File;
-using NotepadPlusPlusPlus.ViewModel.Commands.Format;
-using NotepadPlusPlusPlus.ViewModel.Commands.HelpMenu;
-using NotepadPlusPlusPlus.ViewModel.Commands.ViewMenu;
+using NotepadPlusPlusPlus.ViewModel.Chat.Commands;
+using NotepadPlusPlusPlus.ViewModel.Main.Commands.EditMenu;
+using NotepadPlusPlusPlus.ViewModel.Main.Commands.FileMenu;
+using NotepadPlusPlusPlus.ViewModel.Main.Commands.FormatMenu;
+using NotepadPlusPlusPlus.ViewModel.Main.Commands.HelpMenu;
+using NotepadPlusPlusPlus.ViewModel.Main.Commands.ViewMenu;
 using NotepadPlusPlusPlus.ViewModel.Notepad;
 using System;
 using System.Windows.Input;
@@ -46,8 +46,8 @@ namespace NotepadPlusPlusPlus.ViewModel.Main
 
         #region ViewModel definitions
         public object CurrentViewModel { get; set; }
-        public NotepadViewModel NotepadViewModel { get; set; } = App.NotepadViewModel;
-        public ChatViewModel ChatViewModel { get; set; } = App.ChatViewModel;
+        public NotepadViewModel NotepadViewModel => App.NotepadViewModel;
+        public ChatViewModel ChatViewModel => App.ChatViewModel;
         #endregion
 
 

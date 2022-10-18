@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -64,7 +62,7 @@ namespace NotepadPlusPlusPlus.View.Extensions
             int column = caretPosInSelection - GetCharacterIndexFromLineIndex(line);
             TextBoxHelper.SetLine(this, line);
             TextBoxHelper.SetColumn(this, column);
-            
+
         }
 
 

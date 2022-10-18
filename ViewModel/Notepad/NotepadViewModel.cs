@@ -1,5 +1,4 @@
-﻿using NotepadPlusPlusPlus.Model.WindowModels;
-using NotepadPlusPlusPlus.ViewModel.Main;
+﻿using NotepadPlusPlusPlus.ViewModel.Main;
 
 namespace NotepadPlusPlusPlus.ViewModel.Notepad
 {
@@ -17,5 +16,6 @@ namespace NotepadPlusPlusPlus.ViewModel.Notepad
             _mainViewModel.CurrentModel = _mainViewModel.NotepadModel;
             _mainViewModel.WindowModel.IsChatting = false;
         }
+
     }
 }

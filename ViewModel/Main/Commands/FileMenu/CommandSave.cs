@@ -1,7 +1,6 @@
 ﻿using NotepadPlusPlusPlus.Model;
-using NotepadPlusPlusPlus.ViewModel.Main;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.File
+namespace NotepadPlusPlusPlus.ViewModel.Main.Commands.FileMenu
 {
     public class CommandSave : CommandBase
     {

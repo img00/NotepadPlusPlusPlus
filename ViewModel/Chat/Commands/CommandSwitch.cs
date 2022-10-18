@@ -1,6 +1,6 @@
-﻿using System;
+﻿using NotepadPlusPlusPlus.ViewModel.Main.Commands;
 
-namespace NotepadPlusPlusPlus.ViewModel.Commands.Chat
+namespace NotepadPlusPlusPlus.ViewModel.Chat.Commands
 {
     public class CommandSwitch : CommandBase
     {
