@@ -22,10 +22,10 @@ namespace NotepadPlusPlusPlus.ViewModel.Chat
             switch (choice)
             {
                 case '1':
-                    _mainViewModel.ChatViewModel.ChatState = ChatState.RegisterWaitingUsername;
+                    _mainViewModel.ChatViewModel.ChatState = ChatState.LoginWaitingUsername;
                     return;
                 case '2':
-                    _mainViewModel.ChatViewModel.ChatState = ChatState.LoginWaitingUsername;
+                    _mainViewModel.ChatViewModel.ChatState = ChatState.RegisterWaitingUsername;
                     return;
             }
         }
