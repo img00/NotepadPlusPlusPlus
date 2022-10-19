@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -13,7 +14,6 @@ namespace NotepadPlusPlusPlus.View.Extensions
         public ExtendedTextBox()
         {
             SelectionChanged += ExtendedTextBox_SelectionChanged;
-
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -25,6 +25,7 @@ namespace NotepadPlusPlusPlus.View.Extensions
                 CommandBindings.Add(new CommandBinding(EditingCommands.Delete, HasDeleted));
             }
             base.OnInitialized(e);
+            Thread a = Thread.CurrentThread;
         }
 
         private void HasCut(object sender, ExecutedRoutedEventArgs e) => EditingCommandTriggered?.Invoke(sender, e);
@@ -191,8 +192,8 @@ namespace NotepadPlusPlusPlus.View.Extensions
 
             if (newValue.Equals(tb.CaretIndex)) return;
 
-            SetCaretIndex(tb, tb.CaretIndex);
             tb.CaretIndex = newValue;
+            SetCaretIndex(tb, tb.CaretIndex);
         }
         #endregion
 
@@ -249,6 +250,26 @@ namespace NotepadPlusPlusPlus.View.Extensions
 
             tb.SelectionStart = caret;
             SetCaretIndex(tb, caret);
+        }
+        #endregion
+
+
+        #region LineScroll
+        public static int GetLineScroll(DependencyObject obj) =>
+            (int)obj.GetValue(LineScrollProperty);
+
+        public static void SetLineScroll(DependencyObject obj, int value) =>
+            obj.SetValue(LineScrollProperty, value);
+
+        public static readonly DependencyProperty LineScrollProperty =
+            CreateDependencyProperty("LineScroll", typeof(int), LineScrollChanged);
+
+        private static void LineScrollChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            TextBox? tb = obj as TextBox;
+            if (tb == null) return;
+            if (e.NewValue == null) return;
+            tb.ScrollToLine((int)e.NewValue);
         }
         #endregion
 

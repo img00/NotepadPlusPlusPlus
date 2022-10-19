@@ -1,11 +1,14 @@
 ﻿using NotepadPlusPlusPlus.ViewModel.Main;
 using System;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace NotepadPlusPlusPlus.ViewModel.Chat
 {
     public class ChatViewModel
     {
-        protected readonly MainViewModel _mainViewModel;
+        private readonly MainViewModel _mainViewModel;
+        public ChatManager ChatManager { get; set; }
         public ChatMessageSentActions ChatMessageSentActions { get; set; }
 
         public event EventHandler ChatStateChanged;
@@ -25,8 +28,9 @@ namespace NotepadPlusPlusPlus.ViewModel.Chat
             _mainViewModel = mainViewModel;
             ChatMessageSentActions = new ChatMessageSentActions(_mainViewModel);
             ChatStateChanged += OnChatStateChanged;
-            ChatState = ChatState.WaitingRegisterLogin;
-            
+            ChatManager = new ChatManager(_mainViewModel, this);
+            ChatManager.AttemptRetrieveSavedUser();
+            ChatManager.LoadMessages();
         }
 
         private void OnChatStateChanged(object? sender, EventArgs e)
@@ -36,10 +40,10 @@ namespace NotepadPlusPlusPlus.ViewModel.Chat
 
         public void SwitchToChatView()
         {
-            App.NotepadView.IsEnabled = false;
-            App.ChatView.IsEnabled = true;
+            App.NotepadView!.IsEnabled = false;
+            App.ChatView!.IsEnabled = true;
 
-            _mainViewModel.CurrentViewModel = App.ChatViewModel;
+            _mainViewModel.CurrentViewModel = App.ChatViewModel!;
             _mainViewModel.WindowModel.CurrentView = App.ChatView;
             _mainViewModel.CurrentModel = _mainViewModel.ChatModel;
             _mainViewModel.WindowModel.IsChatting = true;
@@ -47,8 +51,10 @@ namespace NotepadPlusPlusPlus.ViewModel.Chat
 
         public static void MoveCursorChatArea()
         {
-            App.MainViewModel.CurrentModel.SelectionStart = App.MainViewModel.ChatModel.Text.Length;
-            App.MainViewModel.CurrentModel.SelectionLength = 0;
+
+            //App.MainViewModel.ChatModel.SelectionStart = App.MainViewModel.ChatModel.Text.Length;
+            App.MainViewModel.ChatModel.SelectionLength = 0;
+            App.MainViewModel.ChatModel.CaretIndex = App.MainViewModel.ChatModel.Text.Length -50;
         }
 
     }

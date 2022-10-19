@@ -71,7 +71,8 @@
                              ex:TextBoxHelper.SelectionLength="{Binding ChatModel.SelectionLength}"
                              ex:TextBoxHelper.CaretIndex="{Binding ChatModel.CaretIndex}"
                              ex:TextBoxHelper.Line="{Binding ChatModel.Line}"
-                             ex:TextBoxHelper.Column="{Binding ChatModel.Column}">
+                             ex:TextBoxHelper.Column="{Binding ChatModel.Column}"
+                             ex:TextBoxHelper.LineScroll="{Binding ChatModel.LineScroll, Mode=OneWayToSource}">
 
                 <TextBox.InputBindings>
                     <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
@@ -87,9 +88,6 @@
                         <i:InvokeCommandAction Command="{Binding ChatCommands.CmdCutPasteDelete}" PassEventArgsToCommand="True"/>
                     </i:EventTrigger>
 
-                    <i:EventTrigger EventName="TextChanged">
-                        <i:InvokeCommandAction Command="{Binding TextBoxChangedCommand}"/>
-                    </i:EventTrigger>
                 </i:Interaction.Triggers>
 
             </ex:ExtendedTextBox>

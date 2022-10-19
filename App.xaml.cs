@@ -2,6 +2,7 @@
 using NotepadPlusPlusPlus.ViewModel.Chat;
 using NotepadPlusPlusPlus.ViewModel.Main;
 using NotepadPlusPlusPlus.ViewModel.Notepad;
+using System.IO;
 using System.Windows;
 
 /* 
@@ -13,15 +14,20 @@ namespace NotepadPlusPlusPlus
 {
     public partial class App : Application
     {
-        public static NotepadView NotepadView = new();
-        public static ChatView ChatView = new();
+        public static string? DatabaseLocation;
 
-        public static MainViewModel MainViewModel = new();
-        public static NotepadViewModel NotepadViewModel = new();
-        public static ChatViewModel ChatViewModel = new(MainViewModel);
+        public static NotepadView? NotepadView;
+        public static ChatView? ChatView;
+
+        public static MainViewModel? MainViewModel;
+        public static NotepadViewModel? NotepadViewModel;
+        public static ChatViewModel? ChatViewModel;
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            DatabaseLocation = e.Args[0];
+            StartObjects();
+
             MainWindow = new MainWindow()
             {
                 DataContext = MainViewModel
@@ -29,6 +35,16 @@ namespace NotepadPlusPlusPlus
             MainWindow.Show();
 
             base.OnStartup(e);
+        }
+
+        private void StartObjects()
+        {
+            NotepadView = new();
+            ChatView = new();
+
+            MainViewModel = new();
+            NotepadViewModel = new();
+            ChatViewModel = new(MainViewModel);
         }
 
     }

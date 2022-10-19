@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace NotepadPlusPlusPlus.Model.WindowModels
 {
     public class ChatModel : TextboxModel
@@ -30,7 +32,7 @@ namespace NotepadPlusPlusPlus.Model.WindowModels
         }
 
 
-        private string? _messagesArea = "<Ismael> Hola!\n<Macarena> Cállate pedazo de gilipollas o te corto las piernas.\n\n";
+        private string? _messagesArea = string.Empty;
         public string MessagesArea
         {
             get => _messagesArea ?? string.Empty;
@@ -42,13 +44,13 @@ namespace NotepadPlusPlusPlus.Model.WindowModels
             }
         }
 
-        private string? _notificationsArea = "--> Notificación!";
+        private string? _notificationsArea;
         public string NotificationsArea
         {
             get => _notificationsArea ?? string.Empty;
             set
             {
-                _notificationsArea = value + "\n\r";
+                _notificationsArea = (!value.Equals(string.Empty) ? Environment.NewLine : string.Empty) + value + (!value.Equals(string.Empty) ? Environment.NewLine : string.Empty);
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(Text));
             }
@@ -95,6 +97,18 @@ namespace NotepadPlusPlusPlus.Model.WindowModels
         }
 
         public string CharacterCountFormatted => $"{_maxMessageLength - ChatArea.Length}/{_maxMessageLength}";
+
+        private int _lineScroll;
+
+        public int LineScroll
+        {
+            get => _lineScroll;
+            set 
+            {
+                _lineScroll = value;
+                OnPropertyChanged();
+            }
+        }
 
     }
 }
