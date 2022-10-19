@@ -54,7 +54,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Chat
 
             //App.MainViewModel.ChatModel.SelectionStart = App.MainViewModel.ChatModel.Text.Length;
             App.MainViewModel.ChatModel.SelectionLength = 0;
-            App.MainViewModel.ChatModel.CaretIndex = App.MainViewModel.ChatModel.Text.Length -50;
+            App.MainViewModel.ChatModel.CaretIndex = App.MainViewModel.ChatModel.Text.Length;
         }
 
     }

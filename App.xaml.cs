@@ -14,7 +14,7 @@ namespace NotepadPlusPlusPlus
 {
     public partial class App : Application
     {
-        public static string? DatabaseLocation;
+        public static string? DatabaseLocation = @"C:\Users\Ismael Magro.ismael\Desktop\Database";
 
         public static NotepadView? NotepadView;
         public static ChatView? ChatView;
@@ -25,7 +25,6 @@ namespace NotepadPlusPlusPlus
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            DatabaseLocation = e.Args[0];
             StartObjects();
 
             MainWindow = new MainWindow()
