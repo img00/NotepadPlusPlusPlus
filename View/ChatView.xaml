@@ -77,6 +77,8 @@
                 <TextBox.InputBindings>
                     <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
                     <KeyBinding Command="ApplicationCommands.NotACommand" Modifiers="Ctrl" Key="A"/>
+                    <MouseBinding Command="{Binding ViewCommands.CmdZoomIn}" Gesture="{x:Static ex:MouseWheelGesture.CtrlUp}"/>
+                    <MouseBinding Command="{Binding ViewCommands.CmdZoomOut}" Gesture="{x:Static ex:MouseWheelGesture.CtrlDown}"/>
                 </TextBox.InputBindings>
 
                 <i:Interaction.Triggers>

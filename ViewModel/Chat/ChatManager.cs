@@ -130,7 +130,7 @@ namespace NotepadPlusPlusPlus.ViewModel.Chat
 
         public void LoadMessages()
         {
-            StringBuilder messages = new StringBuilder();
+            StringBuilder messages = new();
             
             foreach (Message message in GetListOfMessages())
             {

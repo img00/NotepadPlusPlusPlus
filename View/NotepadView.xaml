@@ -57,7 +57,7 @@
         <Border BorderBrush="#f1f1f1" BorderThickness="0, 2, 0, 1">
 
             <ex:ExtendedTextBox x:Name="MainTextBox"
-                                Focusable="True"
+                             Focusable="True"
                              ScrollViewer.HorizontalScrollBarVisibility="Visible"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
                              DockPanel.Dock="Top"
@@ -78,6 +78,8 @@
                 <TextBox.InputBindings>
                     <KeyBinding Command="ApplicationCommands.SelectAll" Modifiers="Ctrl" Key="E"/>
                     <KeyBinding Command="ApplicationCommands.NotACommand" Modifiers="Ctrl" Key="A"/>
+                    <MouseBinding Command="{Binding ViewCommands.CmdZoomIn}" Gesture="{x:Static ex:MouseWheelGesture.CtrlUp}"/>
+                    <MouseBinding Command="{Binding ViewCommands.CmdZoomOut}" Gesture="{x:Static ex:MouseWheelGesture.CtrlDown}"/>
                 </TextBox.InputBindings>
 
                 <i:Interaction.Triggers>

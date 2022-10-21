@@ -83,8 +83,18 @@ namespace NotepadPlusPlusPlus.Model.WindowModels
 
         public int ChatAreaStart => MessagesArea.Length + NotificationsArea.Length + ChatCursorArea.Length;
 
+        private string? _text;
         public new string Text
         {
+            /*
+            get => _text ?? MessagesArea + NotificationsArea + ChatCursorArea + ChatArea;
+            set
+            {
+                //_text = MessagesArea + NotificationsArea + ChatCursorArea + ChatArea;
+                _text = value;
+                OnPropertyChanged();
+            }*/
+            
             get => MessagesArea + NotificationsArea + ChatCursorArea + ChatArea;
             set
             {
@@ -94,6 +104,7 @@ namespace NotepadPlusPlusPlus.Model.WindowModels
                 ChatArea = newChat;
                 OnPropertyChanged();
             }
+            
         }
 
         public string CharacterCountFormatted => $"{_maxMessageLength - ChatArea.Length}/{_maxMessageLength}";

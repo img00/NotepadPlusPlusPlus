@@ -216,7 +216,13 @@ namespace NotepadPlusPlusPlus.View.Extensions
             if (tb.SelectionLength > 0) return;
             if (tb.LineCount <= 0) return;
 
-            int caret = tb.GetCharacterIndexFromLineIndex((int)e.NewValue) + GetColumn(tb);
+            int caret;
+            // Condition prevents the cursor from jumping multiple lines when the next line has less characters
+            // than the current cursor column
+            if (tb.GetLineLength((int)e.NewValue) >= GetColumn(tb))
+                caret = tb.GetCharacterIndexFromLineIndex((int)e.NewValue) + GetColumn(tb);
+            else
+                caret = tb.GetCharacterIndexFromLineIndex((int)e.NewValue);
 
             if (caret == tb.CaretIndex) return;
 
